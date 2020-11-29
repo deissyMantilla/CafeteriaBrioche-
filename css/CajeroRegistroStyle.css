@@ -1,5 +1,5 @@
 html{
-    background: url("/Users/Carman/Documents/GitHub/CafeteriaBrioche-/imagenes/background.jpg") no-repeat;
+    background: url("/Users/Carman/Documents/GitHub/CafeteriaBrioche-/img/background.jpg") no-repeat;
 	background-size: cover;
     min-height: 100%;
 }
@@ -18,7 +18,7 @@ body{
 
 #registration-form .image{
 	float:left;
-	background-image: url("/Users/Carman/Documents/GitHub/CafeteriaBrioche-/imagenes/desk.jpg");
+	background-image: url("/Users/Carman/Documents/GitHub/CafeteriaBrioche-/img/desk.jpg");
 	height: 500px;
 	width: 30%;
 	background-size: cover;
