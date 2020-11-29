@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta charset="utf-8">
+    <title>Registration Form</title>
+    <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+    <link rel="stylesheet" type="text/css" href="css/CajeroRegistroStyle.css">
+</head>
+
+<body>
+    <div class="container" id="registration-form">
+        <div class="image"></div>
+        <div class="frm">
+            
+            <div class="col-md-6"><label> </label></div>
+            
+            <div class="col-md-6" > <a href="login.html">Regresar</a>  </div>  
+            <h1>Registro Cajero</h1>         
+            <form>
+                <div class="col-md-6">
+                    <label for="nombre"> Nombre: (*)</label><br>
+                    <input type="text" class="form-control" id="nombre" placeholder="Ingrese nombre Cajero" required>
+                </div>
+                <div class="col-md-6">
+                    <label for="apellido">Apellido:(*)</label><br>
+                    <input type="text" class="form-control" id="apellido" placeholder="Ingrese Apellidos Cajero"
+                        required>
+                </div>
+                <div class="col-md-6">
+                    <label for="edad">Edad:(*)</label><br>
+                    <input type="number" min="1" class="form-control" id="edad" placeholder="Ingrese Edad Cajero"
+                        required>
+                </div>
+                <div class="col-md-6">
+                    <label for="identificacion">Identificación:(*)</label><br>
+                    <input type="number" min="1" maxlength="10" class="form-control" id="identificacion"
+                        placeholder="Ingrese Identificación Cajero" required>
+                </div>
+                
+                <div class="col-md-6">
+                    <label for="direccion">Dirección:</label><br>
+                    <input type="text" class="form-control" id="direccion" placeholder="Ingrese Dirección Cajero">
+                </div>
+                <div class="col-md-6">
+                    <label for="email">Correo Electronico:(*)</label><br>
+                    <input type="email" class="form-control" id="email" placeholder="Ingrese Correo Electronico Cajero"
+                        required>
+                </div>
+                <div class="col-md-6">
+                    <label for="sexo">Sexo:(*)</label><br>
+                    <select name="sexo" id="sexo" required>
+                        <option value="M">Masculino</option>
+                        <option value="F">Femenino</option>
+                        <option value="O">Otros</option>
+                    </select>
+                </div>
+                
+                <div class="col-md-6">
+                    <label for="contraseña">Contraseña:(*)</label><br>
+                    <input type="password" class="form-control" id="contraseña" placeholder="Ingrese Contraseña Cajero"
+                        required>
+                </div>
+                <div class="col-md-6">
+                    <label for="imagen">Cargar Imagen:</label>
+                    <input type="file" class="form-control" id="imagen">
+                </div>
+
+                <div class="col-md-6">
+                    <br><button type="submit" class="btn btn-success btn-lg">Submit</button>
+                </div>
+
+
+            </form>
+            <label for="">(*) Campos obligatorios.</label>
+        </div>
+    </div>
+</body>
+
+</html>
