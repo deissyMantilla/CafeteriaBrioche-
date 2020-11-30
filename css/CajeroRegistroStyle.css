@@ -8,39 +8,37 @@ body {
   background-color: transparent;
 }
 
-
 #registration-form {
   max-width: 1000px;
   margin: 120px auto;
 }
-nav{
-	background-color: grey;
+nav {
+  background-color: grey;
   height: 12vh;
-	display: flex;
-	flex-direction: row;
-  }
-  nav > ul{
-	  text-decoration: none;
-	  color: white;
-    margin-left: 6px;
-    margin-block-end: 20px;  
-  }
-  nav > a {
-	text-decoration: none;
-	color: blue;
-	margin-right: 10px;
-	float: right;
-  }
-  nav > a:hover {
-	color: black;
-	font-size: 18px;
-	float: right;
-  }
-  
+  display: flex;
+  flex-direction: row;
+}
+nav > ul {
+  text-decoration: none;
+  color: white;
+  margin-left: 6px;
+  margin-block-end: 20px;
+}
+nav > a {
+  text-decoration: none;
+  color: blue;
+  margin-right: 10px;
+  float: right;
+}
+nav > a:hover {
+  color: black;
+  font-size: 18px;
+  float: right;
+}
 
-#registration-form{
-	max-width: 2000px;
-	margin: 120px auto;
+#registration-form {
+  max-width: 2000px;
+  margin: 120px auto;
 }
 
 #registration-form .image {
@@ -66,17 +64,15 @@ nav{
   margin-bottom: 20px;
 }
 
-
 #registration-form .form-control {
   width: 90%;
   padding: 12px 20px;
   height: auto;
 }
-#registration-form .form-control{
-	width:100%;
-	padding: 12px 20px;
-	height: 34px;
-
+#registration-form .form-control {
+  width: 100%;
+  padding: 12px 20px;
+  height: 34px;
 }
 
 @media screen and (max-width: 700px) {
