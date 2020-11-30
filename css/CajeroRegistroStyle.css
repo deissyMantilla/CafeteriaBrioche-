@@ -8,9 +8,42 @@ body {
   background-color: transparent;
 }
 
+<<<<<<< Updated upstream
 #registration-form {
   max-width: 1000px;
   margin: 120px auto;
+=======
+nav {
+	background-color: whitesmoke;
+	height: 7vh;
+	display: flex;
+	flex-direction: row;
+  }
+  nav > h1{
+	  text-decoration: none;
+	  color: white;
+	  margin-left: 10px;
+  }
+  nav > a {
+	text-decoration: none;
+	color: rgba(122, 178, 231, 0.925,5);
+	margin-right: 10px;
+	float: right;
+  }
+  nav > a:hover {
+	color: black;
+	font-size: 18px;
+	float: right;
+  }
+  nav-tabs{
+	  background-color: azure;
+
+  }
+
+#registration-form{
+	max-width: 2000px;
+	margin: 120px auto;
+>>>>>>> Stashed changes
 }
 
 #registration-form .image {
@@ -36,10 +69,17 @@ body {
   margin-bottom: 20px;
 }
 
+<<<<<<< Updated upstream
 #registration-form .form-control {
   width: 90%;
   padding: 12px 20px;
   height: auto;
+=======
+#registration-form .form-control{
+	width:100%;
+	padding: 12px 20px;
+	height: 34px;
+>>>>>>> Stashed changes
 }
 
 @media screen and (max-width: 700px) {
