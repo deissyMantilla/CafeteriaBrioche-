@@ -8,27 +8,7 @@ body {
   height: 100vh;
   width: 100vw;
 }
-nav {
-  background-color: #777674;
-  height: 15vh;
-  display: flex;
-  flex-direction: row;
-  align-items: center;
-}
-nav > img {
-  width: 80px;
-  height: 80px;
-  margin-left: 20px;
-}
-nav > a {
-  text-decoration: none;
-  color: white;
-  margin-left: 30px;
-}
-nav > a:hover {
-  color: black;
-  font-size: 18px;
-}
+
 .boton {
   background-color: #1a72c4;
   color: white;

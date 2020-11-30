@@ -1,0 +1,22 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: "Montserrat", sans-serif;
+}
+nav a {
+  height: 10vh;
+  margin-top: 30px;
+  color: white;
+}
+nav a:hover {
+  color: #060af5;
+}
+nav > img {
+  width: 80px;
+  height: 80px;
+  margin-left: 15px;
+}
+nav {
+  background-color: #777674;
+}
