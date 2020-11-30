@@ -10,7 +10,7 @@ body {
 }
 nav {
   background-color: #777674;
-  height: 15vh;
+  height: 20vh;
   display: flex;
   flex-direction: row;
   align-items: center;
