@@ -39,7 +39,7 @@
             <td>mark@hotmail.com</td>
             <td>
                 <button class="boton">Eliminar</button>
-                <button class="boton">Actualizar</button>
+                <button class="boton" data-toggle="modal" data-target="#exampleModal">Actualizar</button>
             </td>
           </tr>
           <tr>
@@ -117,6 +117,72 @@
         </tbody>
       </table>
   </div>
+
+
+   <!-- Modal -->
+   <div class="modal fade " id="exampleModal" data-backdrop="static" data-keyboard="false" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-scrollable modal-dialog-centered">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="exampleModalLabel">Actualizar usuario</h5>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body">
+          <form action="">
+          <!--nombre-->
+            <label for="nombre" class="margenSuperior"> Nombre: (*)</label><br>
+            <input type="text" class="form-control" id="nombre" placeholder="Ingrese nombre Cajero" required>
+        <!--apellido-->
+            <label for="apellido" class="margenSuperior">Apellido:</label><br>
+            <input type="text" class="form-control" id="apellido" placeholder="Ingrese Apellidos Cajero">
+        <!--edad-->
+            <label for="edad" class="margenSuperior">Edad:</label><br>
+            <input type="number" min="18" class="form-control" id="edad" placeholder="Ingrese Edad Cajero">
+        <!--identificacion-->
+            <label for="identificacion" class="margenSuperior">Identificación:</label><br>
+            <input type="number" min="1" maxlength="10" class="form-control" id="identificacion"
+                placeholder="Ingrese Identificación Cajero">
+        <!--direccion-->
+            <label for="direccion" class="margenSuperior">Dirección:</label><br>
+            <input type="text" class="form-control" id="direccion" placeholder="Ingrese Dirección Cajero">
+        <!--correo electronico-->
+        
+            <label for="email" class="margenSuperior">Correo Electronico:(*)</label><br>
+            <input type="email" class="form-control" id="email" placeholder="Ingrese Correo Electronico Cajero"
+                required>
+        
+        <!--combobox de genero-->
+        
+            <label for="genero" class="margenSuperior">Genero:</label><br>
+            <select name="genero" id="genero" class="margenDerecha">
+                <option value="M">Masculino</option>
+                <option value="F">Femenino</option>
+                <option value="O">Otros</option>
+            </select>
+        
+                <label for="contraseña" class="margenSuperior" >Contraseña:(*)</label><br>
+                    <input type="password" class="form-control" id="contraseña" placeholder="Ingrese Contraseña"
+                        required>
+            
+            <label for="imagen" class="margenSuperior">Cargar Imagen:</label>
+            <input type="file" class="form-control " id="imagen">
+        
+    </form>
+
+
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
+          <button type="button" id="botonActualizar" class="btn btn-primary" >Guardar cambios</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Final de ventana modal -->
+
 
 
     <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
