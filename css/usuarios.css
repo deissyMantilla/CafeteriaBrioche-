@@ -50,3 +50,16 @@ body {
   width: 100px;
   height: 100px;
 }
+.formularioActualizar {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+}
+.izquierda {
+  width: 232px;
+  text-align: left;
+}
+.margenSuperior {
+  margin-top: 15px;
+}
