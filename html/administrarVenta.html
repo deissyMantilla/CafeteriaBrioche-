@@ -1,0 +1,347 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta charset='utf-8'>
+    <meta name='viewport' content='width=device-width, initial-scale=1'>    
+    <title>Snippet - BBBootstrap</title>
+    <link rel="stylesheet" type="text/css" href="../css/CajeroRegistroStyle.css">
+    <link rel="stylesheet" href="../css/nav.css">
+    <link href='https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-alpha1/dist/css/bootstrap.min.css' rel='stylesheet'>
+    <link href='https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css' rel='stylesheet'>
+    <style>
+        body {
+            background-color: transparent;
+            
+        }
+
+        .t-products {
+            background-image: linear-gradient(to right top, #5629c0, #5625cb, #5620d5, #551ae0, #5412eb);
+            color: #fff;
+            border-radius: 3px
+        }
+
+        .processor {
+            background-color: #fff;
+            margin-top: 5px;
+            border-bottom: 1px solid #eee
+        }
+
+        .brand {
+            background-color: #fff;
+            border-bottom: 1px solid #eee
+        }
+
+        .type {
+            background-color: #fff
+        }
+
+        .product {
+            padding: 10px;
+            background-color: #fff;
+            border-radius: 5px;
+            position: relative
+        }
+
+        .about span {
+            color: #5629c0;
+            font-size: 16px
+        }
+
+        .cart-button button {
+            font-size: 12px;
+            color: #fff;
+            background-color: #5629c0;
+            height: 38px
+        }
+
+        .cart-button button:focus,
+        button:active {
+            font-size: 12px;
+            color: #fff;
+            background-color: #5629c0;
+            box-shadow: none
+        }
+
+        .product_fav i {
+            line-height: 40px;
+            color: #5629c0;
+            font-size: 15px
+        }
+
+        .product_fav {
+            display: inline-block;
+            width: 36px;
+            height: 39px;
+            background: #FFFFFF;
+            box-shadow: 0px 1px 5px rgba(0, 0, 0, 0.1);
+            border-radius: 11%;
+            text-align: center;
+            cursor: pointer;
+            margin-left: 3px;
+            -webkit-transition: all 200ms ease;
+            -moz-transition: all 200ms ease;
+            -ms-transition: all 200ms ease;
+            -o-transition: all 200ms ease;
+            transition: all 200ms ease
+        }
+
+        .product_fav:hover {
+            background: #5629c0
+        }
+
+        .product_fav:hover i {
+            color: #fff
+        }
+
+        .about {
+            margin-top: 12px
+        }
+
+        .off {
+            position: absolute;
+            left: 65%;
+            top: 6%;
+            width: 80px;
+            text-align: center;
+            height: 30px;
+            line-height: 8px;
+            border-radius: 5px;
+            font-size: 13px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #fff
+        }
+    </style>
+    <script type='text/javascript' src=''></script>
+    <script type='text/javascript'
+        src='https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-alpha1/dist/js/bootstrap.bundle.min.js'></script>
+    <script type='text/javascript'></script>
+</head>
+
+<body oncontextmenu='return false' class='snippet-body'>
+    <!--******ZONA DE LA BARRA DE NAVEGACION*******-->
+    <nav class="nav">
+        <img src="../img/latte.png" alt="">
+        <ul class="nav nav-tabs">            
+            <li> <a href="registroProducto.html" class="nav-link active">Registrar Producto</a></li>
+            <li> <a href="registroCajero.html" class="nav-link">Registar cajero</a></li>
+            <li> <a href="productos.html" class="nav-link">Productos</a></li>
+            <li> <a href="usuarios.html" class="nav-link">Usuarios</a></li>
+            <li> <a href="administrarVenta.html" class="nav-link">Administrar Venta</a></li>
+            <li> <a href="loginAdmin.html" class="nav-link">Cerrar sesión</a></li>
+        </ul>
+    </nav>
+    <!--********Zona Morada********-->
+    <div class="container-fluid mt-5 mb-5">
+        <div class="row g-2">
+            <div class="col-md-3">
+                <div class="t-products p-2">
+                    <h6 class="text-uppercase">Venta De Producto</h6>
+                </div>
+                <!--********Zona Blanca Izquierda de los detalles de la compra********-->
+                <div class="processor p-2">
+                    <div class="heading d-flex justify-content-between align-items-center">
+                        <h6 class="text-uppercase">Endulzantes</h6> <span>--</span>
+                    </div>
+                    <div class="d-flex justify-content-between mt-2">
+                        <div class="form-check"> <input class="form-check-input" type="checkbox" value=""
+                                id="flexCheckDefault"> <label class="form-check-label" for="flexCheckDefault"> Azucar
+                            </label> </div> <span>3</span>
+                    </div>
+                    <div class="d-flex justify-content-between mt-2">
+                        <div class="form-check"> <input class="form-check-input" type="checkbox" value=""
+                                id="flexCheckChecked" checked> <label class="form-check-label" for="flexCheckChecked">
+                                Stevia</label> </div> <span>4</span>
+                    </div>
+                    <div class="d-flex justify-content-between mt-2">
+                        <div class="form-check"> <input class="form-check-input" type="checkbox" value=""
+                                id="flexCheckChecked" checked> <label class="form-check-label" for="flexCheckChecked">
+                                Panela </label> </div> <span>14</span>
+                    </div>
+                    <div class="d-flex justify-content-between mt-2">
+                        <div class="form-check"> <input class="form-check-input" type="checkbox" value=""
+                                id="flexCheckChecked" checked> <label class="form-check-label" for="flexCheckChecked">
+                                Sin azucar </label> </div> <span>8</span>
+                    </div>
+                    <div class="d-flex justify-content-between mt-2">
+                        <div class="form-check"> <input class="form-check-input" type="checkbox" value=""
+                                id="flexCheckChecked" checked> <label class="form-check-label" for="flexCheckChecked">
+                                OTROS</label> </div> <span>14</span>
+                    </div>
+                </div>
+                <!--********Zona Blanca Del Acompañante********-->
+                <div class="brand p-2">
+                    <div class="heading d-flex justify-content-between align-items-center">
+                        <h6 class="text-uppercase">Acompañantes</h6> <span>--</span>
+                    </div>
+                    <div class="d-flex justify-content-between mt-2">
+                        <div class="form-check"> <input class="form-check-input" type="checkbox" value=""
+                                id="flexCheckDefault"> <label class="form-check-label" for="flexCheckDefault"> Rollos de
+                                canela
+                            </label> </div> <span>13</span>
+                    </div>
+                    <div class="d-flex justify-content-between mt-2">
+                        <div class="form-check"> <input class="form-check-input" type="checkbox" value=""
+                                id="flexCheckChecked" checked> <label class="form-check-label" for="flexCheckChecked">
+                                Pan de Bono </label> </div> <span>4</span>
+                    </div>
+                    <div class="d-flex justify-content-between mt-2">
+                        <div class="form-check"> <input class="form-check-input" type="checkbox" value=""
+                                id="flexCheckChecked" checked> <label class="form-check-label" for="flexCheckChecked">
+                                Croissant </label> </div> <span>24</span>
+                    </div>
+                    <div class="d-flex justify-content-between mt-2">
+                        <div class="form-check"> <input class="form-check-input" type="checkbox" value=""
+                                id="flexCheckChecked" checked> <label class="form-check-label" for="flexCheckChecked">
+                                muffin </label> </div> <span>18</span>
+                    </div>
+                    <div class="d-flex justify-content-between mt-2">
+                        <div class="form-check"> <input class="form-check-input" type="checkbox" value=""
+                                id="flexCheckChecked" checked> <label class="form-check-label" for="flexCheckChecked">
+                                OTROS </label> </div> <span>44</span>
+                    </div>
+                </div>
+                <!--********Zona Types********-->
+                <div class="type p-2 mb-2">
+                    <div class="heading d-flex justify-content-between align-items-center">
+                        <h6 class="text-uppercase">PAGO</h6> <span>--</span>
+                    </div>
+                    <div class="d-flex justify-content-between mt-2">
+                        <label class="form-check-label" for="flexCheckChecked">
+                            A PAGAR </label> <span>$44</span>
+                    </div> 
+                    <button type="button" class="btn btn-success btn-lg btn-block">PAGAR</button>
+                    <button type="button" class="btn btn-danger btn-lg btn-block">CANCELAR COMPRA</button>
+                </div>
+            </div>
+            <!--********Zona de compras********-->
+            <div class="col-md-9">
+                <div class="row g-2">
+                    <div class="col-md-4">
+                        <div class="product py-4"> <span class="off bg-success">-25% Descuento</span>
+                            <div class="text-center"> <img src="../img/bombon.jpeg" width="200"> </div>
+                            <div class="about text-center">
+                                <h5>Bombon</h5> <span>$1.999</span>
+                            </div>
+                            <div class="cart-button mt-3 px-2 d-flex justify-content-between align-items-center">
+                                <button class="btn btn-primary text-uppercase">Agregar</button>
+                                <div class="add"> <span class="product_fav"><i class="fa fa-heart-o"></i></span> <span
+                                        class="product_fav"><i class="fa fa-opencart"></i></span> </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-4">
+                        <div class="product py-4"> <span class="off bg-warning">Agotado</span>
+                            <div class="text-center"> <img src="../img/cappucino.jpeg" width="200"> </div>
+                            <div class="about text-center">
+                                <h5>Cappucino </h5> <span>$1.250</span>
+                            </div>
+                            <div class="cart-button mt-3 px-2 d-flex justify-content-between align-items-center">
+                                <button class="btn btn-primary text-uppercase">Agregar</button>
+                                <div class="add"> <span class="product_fav"><i class="fa fa-heart-o"></i></span> <span
+                                        class="product_fav"><i class="fa fa-opencart"></i></span> </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-4">
+                        <div class="product py-4">
+                            <div class="text-center"> <img src="../img/carajillo.jpeg" width="200"> </div>
+                            <div class="about text-center">
+                                <h5>carajillo</h5> <span>$1.999,99</span>
+                            </div>
+                            <div class="cart-button mt-3 px-2 d-flex justify-content-between align-items-center">
+                                <button class="btn btn-primary text-uppercase">Agregar</button>
+                                <div class="add"> <span class="product_fav"><i class="fa fa-heart-o"></i></span> <span
+                                        class="product_fav"><i class="fa fa-opencart"></i></span> </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-4">
+                        <div class="product py-4"> <span class="off bg-success">-10% Descuento</span>
+                            <div class="text-center"> <img src="../img/clasico.jpeg" width="200"> </div>
+                            <div class="about text-center">
+                                <h5>Clasico</h5> <span>$1,245.89</span>
+                            </div>
+                            <div class="cart-button mt-3 px-2 d-flex justify-content-between align-items-center">
+                                <button class="btn btn-primary text-uppercase">Agregar</button>
+                                <div class="add"> <span class="product_fav"><i class="fa fa-heart-o"></i></span> <span
+                                        class="product_fav"><i class="fa fa-opencart"></i></span> </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-4">
+                        <div class="product py-4">
+                            <!-- <span class="off bg-success">-25% OFF</span> -->
+                            <div class="text-center"> <img src="../img/conLeche.jpeg" width="200"> </div>
+                            <div class="about text-center">
+                                <h5>Cafe Con Leche</h5> <span>$2.999,99</span>
+                            </div>
+                            <div class="cart-button mt-3 px-2 d-flex justify-content-between align-items-center">
+                                <button class="btn btn-primary text-uppercase">Agregar</button>
+                                <div class="add"> <span class="product_fav"><i class="fa fa-heart-o"></i></span> <span
+                                        class="product_fav"><i class="fa fa-opencart"></i></span> </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-4">
+                        <div class="product py-4"> <span class="off bg-success">-5% Descuento</span>
+                            <div class="text-center"> <img src="../img/cortao.jpeg" width="200"> </div>
+                            <div class="about text-center">
+                                <h5>Cortado</h5> <span>$999,99</span>
+                            </div>
+                            <div class="cart-button mt-3 px-2 d-flex justify-content-between align-items-center">
+                                <button class="btn btn-primary text-uppercase">Agregar</button>
+                                <div class="add"> <span class="product_fav"><i class="fa fa-heart-o"></i></span> <span
+                                        class="product_fav"><i class="fa fa-opencart"></i></span> </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-4">
+                        <div class="product py-4"> <span class="off bg-warning"></span>
+                            <div class="text-center"> <img src="../img/descafeinao.jpeg" width="200"> </div>
+                            <div class="about text-center">
+                                <h5>Descafeinado</h5> <span>$3.999,99</span>
+                            </div>
+                            <div class="cart-button mt-3 px-2 d-flex justify-content-between align-items-center">
+                                <button class="btn btn-primary text-uppercase">Agregar</button>
+                                <div class="add"> <span class="product_fav"><i class="fa fa-heart-o"></i></span> <span
+                                        class="product_fav"><i class="fa fa-opencart"></i></span> </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-4">
+                        <div class="product py-4"><span class="off bg-warning">-10% Descuento</span>
+                            <div class="text-center"> <img src="../img/helado.jpeg" width="200"> </div>
+                            <div class="about text-center">
+                                <h5>Cafe Helado</h5> <span>$9.999,99</span>
+                            </div>
+                            <div class="cart-button mt-3 px-2 d-flex justify-content-between align-items-center">
+                                <button class="btn btn-primary text-uppercase">Agregar</button>
+                                <div class="add"> <span class="product_fav"><i class="fa fa-heart-o"></i></span> <span
+                                        class="product_fav"><i class="fa fa-opencart"></i></span> </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-4">
+                        <div class="product py-4">
+                            <div class="text-center"> <img src="https://i.imgur.com/OdRSpXG.jpg" width="200"> </div>
+                            <div class="about text-center">
+                                <h5>Dell surface book 5</h5> <span>$1,999.99</span>
+                            </div>
+                            <div class="cart-button mt-3 px-2 d-flex justify-content-between align-items-center">
+                                <button class="btn btn-primary text-uppercase">Add to cart</button>
+                                <div class="add"> <span class="product_fav"><i class="fa fa-heart-o"></i></span> <span
+                                        class="product_fav"><i class="fa fa-opencart"></i></span> </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+
+</html>
