@@ -7,19 +7,30 @@
 body {
   height: 100vh;
   width: 100vw;
+  background-image: url("../img/background.jpg");
+  background-size: cover;
 }
 
 .titulo {
   font-size: 30px;
+}
+.contenidoRegistro {
+  width: 100vw;
+  height: 90vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 .cuadroRegistroProducto {
   display: flex;
   align-items: center;
   justify-content: center;
   flex-direction: column;
-  height: 85vh;
-  width: 100vw;
+  min-width: 500px;
+  max-width: 700px;
+  height: 400px;
   background-color: white;
+  padding: 10px;
 }
 
 .formularioProducto {
