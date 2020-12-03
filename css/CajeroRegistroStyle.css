@@ -13,7 +13,7 @@ body {
   margin: 120px auto;
 }
 nav {
-  background-color: grey;
+  background-color: #bebebc;
   height: 12vh;
   display: flex;
   flex-direction: row;
