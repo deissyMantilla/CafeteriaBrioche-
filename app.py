@@ -3,9 +3,22 @@ from flask import Flask, redirect, url_for, render_template, request
 app = Flask(__name__)
 
 
-@app.route('/')
+@app.route('/', methods=['GET'])
 def home():
-    return "Pagina principal"
+    if request.method == 'GET':
+        return render_template('html/index.html')
+
+
+@app.route('/cajeros', methods=['GET'])
+def cajeros():
+    if request.method == 'GET':
+        return render_template('html/usuarios.html')
+
+
+@app.route('/productos', methods=['GET'])
+def productos():
+    if request.method == 'GET':
+        return render_template('html/productos.html')
 
 
 if __name__ == '__main__':
