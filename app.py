@@ -15,10 +15,12 @@ def cajeros():
         return render_template('html/usuarios.html')
 
 
-@app.route('/productos', methods=['GET'])
+@app.route('/productos', methods=['GET', 'POST'])
 def productos():
     if request.method == 'GET':
         return render_template('html/productos.html')
+    if request.method == 'POST':
+        return 'Cambio guardado con exito'
 
 
 if __name__ == '__main__':

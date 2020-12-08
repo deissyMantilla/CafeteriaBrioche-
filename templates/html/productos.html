@@ -96,7 +96,7 @@
           </button>
         </div>
         <div class="modal-body">
-          <form action="" class="formularioActualizar">
+          <form action="" class="formularioActualizar" method="POST">
             <label for="" class="izquierda margenSuperior">Nombre:*</label>
             <input type="text" placeholder="Nombre" required>
             <label for="" class="izquierda margenSuperior">Precio:*</label>
@@ -105,12 +105,13 @@
             <input type="number" placeholder="Cantidad" required>
             <label for="" class="margenSuperior">Imagen producto</label>
             <input type="file" required> 
+            <input type="submit" value="Guardar cambios" class="boton">
           </form>
         </div>
         <div class="modal-footer">
-          <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
-          <button type="button" id="botonActualizar" class="btn btn-primary" >Guardar cambios</button>
-        </div>
+          <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
+          <!-- <button type="button" id="botonActualizar" class="btn btn-primary" >Guardar cambios</button>
+        --> </div>
       </div>
     </div>
   </div>
