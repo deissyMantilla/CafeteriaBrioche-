@@ -38,6 +38,11 @@ def registroCajero():
     if request.method == 'GET':
         return render_template('html/registroCajero.html')
 
+@app.route("/registroProducto", methods=['GET', 'POST'])
+def registroProducto():
+    if request.method == 'GET':
+        return render_template('html/registroProducto.html')
+
 
 @app.route('/cajeros', methods=['GET', 'POST'])
 def cajeros():
