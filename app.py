@@ -29,6 +29,8 @@ def loginCajero():
 def recuperarPass():
     if request.method == 'GET':
         return render_template('html/recuperaContrasenia.html')
+    if request.method == 'POST':
+        return redirect(url_for('loginCajero'))
 
 
 @app.route('/cajeros', methods=['GET', 'POST'])
