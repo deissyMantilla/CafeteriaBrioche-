@@ -9,6 +9,14 @@ def home():
         return render_template('html/index.html')
 
 
+@app.route("/login", methods=['GET', 'POST'])
+def login():
+    if request.method == 'GET':
+        return render_template('html/loginAdmin.html')
+    if request.method == 'POST':
+      #  return redirect(url_for('/productos'))
+
+
 @app.route('/cajeros', methods=['GET'])
 def cajeros():
     if request.method == 'GET':
