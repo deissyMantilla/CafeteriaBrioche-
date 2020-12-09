@@ -33,6 +33,12 @@ def recuperarPass():
         return redirect(url_for('loginCajero'))
 
 
+@app.route("/registroCajero", methods=['GET', 'POST'])
+def registroCajero():
+    if request.method == 'GET':
+        return render_template('html/registroCajero.html')
+
+
 @app.route('/cajeros', methods=['GET', 'POST'])
 def cajeros():
     if request.method == 'GET':
