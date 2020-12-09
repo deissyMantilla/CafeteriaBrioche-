@@ -9,12 +9,15 @@ def home():
         return render_template('html/index.html')
 
 
-@app.route("/login", methods=['GET', 'POST'])
-def login():
+@app.route("/login/<string:pagina>", methods=['GET', 'POST'])
+def login(pagina):
     if request.method == 'GET':
-        return render_template('html/loginAdmin.html')
+        if (pagina == 'admin'):
+            return render_template('html/loginAdmin.html')
+        elif (pagina == 'cajero'):
+            return render_template('html/loginCajero.html')
     if request.method == 'POST':
-      #  return redirect(url_for('/productos'))
+        return redirect(url_for('productos'))
 
 
 @app.route('/cajeros', methods=['GET'])
