@@ -15,15 +15,15 @@
   <body>
     <div class="cuadroLogin">
       <h3 class="ingresaLabel">Ingresa a la plataforma</h3>
-      <form action="" class="formularioLogin">
-        <input type="email" placeholder="Correo electronico" class="inputFormulario" />
-        <input type="password" placeholder="Contraseña" class="inputFormulario" />
+      <form action="" class="formularioLogin" method="POST">
+        <input type="email" placeholder="Correo electronico" class="inputFormulario" required/>
+        <input type="password" placeholder="Contraseña" class="inputFormulario" required/>
         <div class="cajaBotones">
           <input type="submit" value="Ingresar" class="botonIngresar" />
-          <a href="../index.html" class="botonIngresar"> Regresar</a>
+          <a href="/" class="botonIngresar"> Regresar</a>
         </div>
       </form>
-      <a href="recuperaContrasenia.html" class="recuperarContrasena">Recuperar Contraseña</a>
+      <a href="/recuperaPass" class="recuperarContrasena">Recuperar Contraseña</a>
     </div>
   </body>
 </html>

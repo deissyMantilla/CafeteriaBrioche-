@@ -9,15 +9,20 @@ def home():
         return render_template('html/index.html')
 
 
-@app.route("/login/<string:pagina>", methods=['GET', 'POST'])
-def login(pagina):
+@app.route("/loginAdmin", methods=['GET', 'POST'])
+def login():
     if request.method == 'GET':
-        if (pagina == 'admin'):
-            return render_template('html/loginAdmin.html')
-        elif (pagina == 'cajero'):
-            return render_template('html/loginCajero.html')
+        return render_template('html/loginAdmin.html')
     if request.method == 'POST':
         return redirect(url_for('productos'))
+
+
+@app.route("/loginCajero", methods=['GET', 'POST'])
+def loginCajero():
+    if request.method == 'GET':
+        return render_template('html/loginCajero.html')
+    if request.method == 'POST':
+        return redirect(url_for('ventas'))
 
 
 @app.route('/cajeros', methods=['GET'])
@@ -32,6 +37,12 @@ def productos():
         return render_template('html/productos.html')
     if request.method == 'POST':
         return 'Cambio guardado con exito'
+
+
+@app.route('/ventas', methods=['GET'])
+def ventas():
+    if request.method == 'GET':
+        return render_template('html/administrarVenta.html')
 
 
 if __name__ == '__main__':
