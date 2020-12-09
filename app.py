@@ -31,9 +31,11 @@ def recuperarPass():
         return render_template('html/recuperaContrasenia.html')
 
 
-@app.route('/cajeros', methods=['GET'])
+@app.route('/cajeros', methods=['GET', 'POST'])
 def cajeros():
     if request.method == 'GET':
+        return render_template('html/usuarios.html')
+    if request.method == 'POST':
         return render_template('html/usuarios.html')
 
 
@@ -42,7 +44,7 @@ def productos():
     if request.method == 'GET':
         return render_template('html/productos.html')
     if request.method == 'POST':
-        return 'Cambio guardado con exito'
+        return render_template('html/productos.html')
 
 
 @app.route('/ventas', methods=['GET'])
