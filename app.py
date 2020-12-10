@@ -65,9 +65,11 @@ def productos():
         return render_template('html/productos.html', productos=productos)
 
 
-@app.route('/ventas', methods=['GET'])
+@app.route('/ventas', methods=['GET', 'POST'])
 def ventas():
     if request.method == 'GET':
+        return render_template('html/administrarVenta.html')
+    if request.method == 'POST':
         return render_template('html/administrarVenta.html')
 
 
