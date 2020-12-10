@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Recuperar contraseña</title>
-    <link rel="stylesheet" href="../css/estiloRecuperaContrasenia.css">
+    <link rel="stylesheet" href="{{url_for('static', filename='css/estiloRecuperaContrasenia.css')}}">
     <link
       href="https://fonts.googleapis.com/css2?family=Montserrat&family=Montserrat+Alternates&display=swap"
       rel="stylesheet"
@@ -14,8 +14,8 @@
     <div class="contene">
         <h1>Recuperar contraseña</h1>
         <div>Ingresar con el correo de registro para recuperar contraseña</div><br>
-       <form action="">
-           <input type="email" placeholder="Correo electrónico" class="inputForm"><br>
+       <form action="" method="POST">
+           <input type="email" placeholder="Correo electrónico" class="inputForm" required><br>
            <input type="submit" value="Recuperar contraseña" class="botonRecuperar"><br>
        </form>
     </div>

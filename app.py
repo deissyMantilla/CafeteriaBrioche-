@@ -9,9 +9,46 @@ def home():
         return render_template('html/index.html')
 
 
-@app.route('/cajeros', methods=['GET'])
+@app.route("/loginAdmin", methods=['GET', 'POST'])
+def login():
+    if request.method == 'GET':
+        return render_template('html/loginAdmin.html')
+    if request.method == 'POST':
+        return redirect(url_for('productos'))
+
+
+@app.route("/loginCajero", methods=['GET', 'POST'])
+def loginCajero():
+    if request.method == 'GET':
+        return render_template('html/loginCajero.html')
+    if request.method == 'POST':
+        return redirect(url_for('ventas'))
+
+
+@app.route("/recuperarPass", methods=['GET', 'POST'])
+def recuperarPass():
+    if request.method == 'GET':
+        return render_template('html/recuperaContrasenia.html')
+    if request.method == 'POST':
+        return redirect(url_for('loginCajero'))
+
+
+@app.route("/registroCajero", methods=['GET', 'POST'])
+def registroCajero():
+    if request.method == 'GET':
+        return render_template('html/registroCajero.html')
+
+@app.route("/registroProducto", methods=['GET', 'POST'])
+def registroProducto():
+    if request.method == 'GET':
+        return render_template('html/registroProducto.html')
+
+
+@app.route('/cajeros', methods=['GET', 'POST'])
 def cajeros():
     if request.method == 'GET':
+        return render_template('html/usuarios.html')
+    if request.method == 'POST':
         return render_template('html/usuarios.html')
 
 
@@ -20,7 +57,13 @@ def productos():
     if request.method == 'GET':
         return render_template('html/productos.html')
     if request.method == 'POST':
-        return 'Cambio guardado con exito'
+        return render_template('html/productos.html')
+
+
+@app.route('/ventas', methods=['GET'])
+def ventas():
+    if request.method == 'GET':
+        return render_template('html/administrarVenta.html')
 
 @app.route('/balance/<string:fecha_balance>/')
 def balance(fecha_balance):
