@@ -11,6 +11,7 @@
       href="https://fonts.googleapis.com/css2?family=Montserrat&family=Montserrat+Alternates&display=swap"
       rel="stylesheet"
     />
+    <script src="{{url_for('static', filename='js/funcionesModal.js')}}"></script>
   </head>
 <body>
   <nav class="nav">
@@ -29,92 +30,28 @@
           <tr>
             <th scope="col">#</th>
             <th scope="col">Nombre</th>
+            <th scope="col">Apellido</th>
+            <th scope="col">Edad</th>
             <th scope="col">Correo</th>
+            <th scope="col">Identificación</th>
             <th scope="col"></th>
           </tr>
         </thead>
         <tbody>
+          {% for cajero in cajeros%}
           <tr>
-            <th scope="row">1</th>
-            <td>Mark</td>
-            <td>mark@hotmail.com</td>
+            <th scope="row" id="id{{cajero.id}}">{{cajero.id}}</th>
+            <td id="nombre{{cajero.id}}">{{cajero.nombre}}</td>
+            <td id="apellido{{cajero.id}}">{{cajero.apellido}}</td>
+            <td id="edad{{cajero.id}}">{{cajero.edad}}</td>
+            <td id="correo{{cajero.id}}">{{cajero.correo}}</td>
+            <td id="identificacion{{cajero.id}}">{{cajero.identificacion}}</td>
             <td>
-                <button class="boton">Eliminar</button>
-                <button class="boton" data-toggle="modal" data-target="#exampleModal">Actualizar</button>
+                <button class="boton" id="eliminar{{cajero.id}}">Eliminar</button>
+                <button class="boton" data-toggle="modal" data-target="#exampleModal" onclick="abrirModalCajeros(this.id)" id="{{cajero.id}}">Actualizar</button>
             </td>
           </tr>
-          <tr>
-            <th scope="row">2</th>
-            <td>Jacob</td>
-            <td>Jacob@gmail.com</td>
-            <td>
-                <button class="boton">Eliminar</button>
-                <button class="boton">Actualizar</button>
-            </td>
-          </tr>
-          <tr>
-            <th scope="row">3</th>
-            <td>Larry</td>
-            <td>Larry@gmail.com</td>
-            <td>
-                <button class="boton">Eliminar</button>
-                <button class="boton">Actualizar</button>
-            </td>
-          </tr>
-          <tr>
-            <th scope="row">1</th>
-            <td>Mark</td>
-            <td>mark@hotmail.com</td>
-            <td>
-                <button class="boton">Eliminar</button>
-                <button class="boton">Actualizar</button>
-            </td>
-          </tr>
-          <tr>
-            <th scope="row">1</th>
-            <td>Mark</td>
-            <td>mark@hotmail.com</td>
-            <td>
-                <button class="boton">Eliminar</button>
-                <button class="boton">Actualizar</button>
-            </td>
-          </tr>
-          <tr>
-            <th scope="row">1</th>
-            <td>Mark</td>
-            <td>mark@hotmail.com</td>
-            <td>
-                <button class="boton">Eliminar</button>
-                <button class="boton">Actualizar</button>
-            </td>
-          </tr>
-          <tr>
-            <th scope="row">1</th>
-            <td>Mark</td>
-            <td>mark@hotmail.com</td>
-            <td>
-                <button class="boton">Eliminar</button>
-                <button class="boton">Actualizar</button>
-            </td>
-          </tr>
-          <tr>
-            <th scope="row">1</th>
-            <td>Mark</td>
-            <td>mark@hotmail.com</td>
-            <td>
-                <button class="boton">Eliminar</button>
-                <button class="boton">Actualizar</button>
-            </td>
-          </tr>
-          <tr>
-            <th scope="row">1</th>
-            <td>Mark</td>
-            <td>mark@hotmail.com</td>
-            <td>
-                <button class="boton">Eliminar</button>
-                <button class="boton">Actualizar</button>
-            </td>
-          </tr>
+          {% endfor%}
         </tbody>
       </table>
   </div>
@@ -132,43 +69,45 @@
         </div>
         <div class="modal-body">
           <form action="">
+            <label for="" class="margenSuperior">Id:(*)</label>
+            <input type="text" readonly id="idForm" class="form-control">
           <!--nombre-->
             <label for="nombre" class="margenSuperior"> Nombre: (*)</label><br>
-            <input type="text" class="form-control" id="nombre" placeholder="Ingrese nombre Cajero" required>
+            <input type="text" class="form-control" id="nombreForm" placeholder="Ingrese nombre Cajero" required>
         <!--apellido-->
             <label for="apellido" class="margenSuperior">Apellido:</label><br>
-            <input type="text" class="form-control" id="apellido" placeholder="Ingrese Apellidos Cajero">
+            <input type="text" class="form-control" id="apellidoForm" placeholder="Ingrese Apellidos Cajero">
         <!--edad-->
             <label for="edad" class="margenSuperior">Edad:</label><br>
-            <input type="number" min="18" class="form-control" id="edad" placeholder="Ingrese Edad Cajero">
+            <input type="number" min="18" class="form-control" id="edadForm" placeholder="Ingrese Edad Cajero">
         <!--identificacion-->
             <label for="identificacion" class="margenSuperior">Identificación:</label><br>
-            <input type="number" min="1" maxlength="10" class="form-control" id="identificacion"
+            <input type="number" min="1" maxlength="10" class="form-control" id="identificacionForm"
                 placeholder="Ingrese Identificación Cajero">
         <!--direccion-->
             <label for="direccion" class="margenSuperior">Dirección:</label><br>
-            <input type="text" class="form-control" id="direccion" placeholder="Ingrese Dirección Cajero">
+            <input type="text" class="form-control" id="direccionForm" placeholder="Ingrese Dirección Cajero">
         <!--correo electronico-->
         
             <label for="email" class="margenSuperior">Correo Electronico:(*)</label><br>
-            <input type="email" class="form-control" id="email" placeholder="Ingrese Correo Electronico Cajero"
+            <input type="email" class="form-control" id="emailForm" placeholder="Ingrese Correo Electronico Cajero"
                 required>
         
         <!--combobox de genero-->
         
             <label for="genero" class="margenSuperior">Genero:</label><br>
-            <select name="genero" id="genero" class="margenDerecha">
+            <select name="genero" id="generoForm" class="margenDerecha" >
                 <option value="M">Masculino</option>
                 <option value="F">Femenino</option>
                 <option value="O">Otros</option>
             </select>
         
                 <label for="contraseña" class="margenSuperior" >Contraseña:(*)</label><br>
-                    <input type="password" class="form-control" id="contraseña" placeholder="Ingrese Contraseña"
+                    <input type="password" class="form-control" id="contrasenaForm" placeholder="Ingrese Contraseña"
                         required>
             
             <label for="imagen" class="margenSuperior">Cargar Imagen:</label>
-            <input type="file" class="form-control " id="imagen">
+            <input type="file" class="form-control " id="imagenForm">
             <input type="submit" value="Guardar cambios" class="boton">
     </form>
 

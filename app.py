@@ -47,10 +47,12 @@ def registroProducto():
 
 @app.route('/cajeros', methods=['GET', 'POST'])
 def cajeros():
+    cajeros = [{'id': '1', 'nombre': 'Camila', 'apellido': 'sanchez', 'edad': '20', 'identificacion': '12345',
+                'direccion': 'cale123', 'correo': 'lo@lo.com', 'genero': 'Femenino', 'contraseña': '12345', 'imagen': 'imagen'}]
     if request.method == 'GET':
-        return render_template('html/usuarios.html')
+        return render_template('html/usuarios.html', cajeros=cajeros)
     if request.method == 'POST':
-        return render_template('html/usuarios.html')
+        return render_template('html/usuarios.html', cajeros=cajeros)
 
 
 @app.route('/productos', methods=['GET', 'POST'])
@@ -60,7 +62,7 @@ def productos():
     if request.method == 'GET':
         return render_template('html/productos.html', productos=productos)
     if request.method == 'POST':
-        return render_template('html/productos.html')
+        return render_template('html/productos.html', productos=productos)
 
 
 @app.route('/ventas', methods=['GET'])
