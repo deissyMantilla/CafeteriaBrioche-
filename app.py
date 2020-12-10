@@ -65,9 +65,10 @@ def ventas():
     if request.method == 'GET':
         return render_template('html/administrarVenta.html')
 
-@app.route('/balance/<string:fecha_balance>/')
-def balance(fecha_balance):
-    return render_template('html/balance.html', fecha_balance = fecha_balance)
+
+@app.route('/balance/')
+def balance():
+    return render_template('html/balance.html')
 
 
 if __name__ == '__main__':
