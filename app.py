@@ -22,6 +22,10 @@ def productos():
     if request.method == 'POST':
         return 'Cambio guardado con exito'
 
+@app.route('/balance/<string:fecha_balance>/')
+def balance(fecha_balance):
+    return render_template('html/balance.html', fecha_balance = fecha_balance)
+
 
 if __name__ == '__main__':
     # lanzar el servidor por el puerto
