@@ -38,6 +38,7 @@ def registroCajero():
     if request.method == 'GET':
         return render_template('html/registroCajero.html')
 
+
 @app.route("/registroProducto", methods=['GET', 'POST'])
 def registroProducto():
     if request.method == 'GET':
@@ -54,8 +55,10 @@ def cajeros():
 
 @app.route('/productos', methods=['GET', 'POST'])
 def productos():
+    productos = [{'id': '1', 'nombre': 'cafe', 'precio': '1000',
+                  'cantidad': '100', 'img': 'img/hot-tea.png'}, {"id": "2", "nombre": "Capuchino", "precio": "2000", "cantidad": "100", 'img': 'img/hot-tea.png'}]
     if request.method == 'GET':
-        return render_template('html/productos.html')
+        return render_template('html/productos.html', productos=productos)
     if request.method == 'POST':
         return render_template('html/productos.html')
 
