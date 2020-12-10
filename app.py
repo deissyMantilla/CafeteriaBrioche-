@@ -66,7 +66,7 @@ def ventas():
         return render_template('html/administrarVenta.html')
 
 
-@app.route('/balance/')
+@app.route('/balance', methods=['GET'])
 def balance():
     return render_template('html/balance.html')
 
