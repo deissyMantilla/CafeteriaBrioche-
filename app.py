@@ -71,6 +71,11 @@ def ventas():
         return render_template('html/administrarVenta.html')
 
 
+@app.route('/balance', methods=['GET'])
+def balance():
+    return render_template('html/balance.html')
+
+
 if __name__ == '__main__':
     # lanzar el servidor por el puerto
     # debug= true para que se actualicen los cambios en el server
