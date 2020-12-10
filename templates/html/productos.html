@@ -12,8 +12,8 @@
       rel="stylesheet"
     />
     <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
-
-    <script src="../js/funcionesModal.js"></script>
+    <script src="{{url_for('static', filename='js/funcionesModal.js')}}"></script>
+    
 </head>
 <body>
     <nav class="nav">
@@ -39,45 +39,21 @@
             </tr>
           </thead>
           <tbody>
+            {% for producto in productos %}
             <tr>
-              <th scope="row">1</th>
-              <td>Cafe</td>
+              <th scope="row" id="id{{producto.id}}">{{producto.id}}</th>
+              <td id="nombre{{producto.id}}">{{producto.nombre}}</td>
               <td>
-                 <img src="{{url_for('static', filename='img/hot-tea.png')}}" alt="" style="width: 100px; height: 100px;">  
+                 <img src="{{url_for('static', filename=producto.img)}}" alt="" style="width: 100px; height: 100px;" id="imagen{{producto.id}}">  
               </td>
-              <td>$1000</td>
-              <td>100</td>
+              <td id="precio{{producto.id}}">{{producto.precio}}</td>
+              <td id="cantidad{{producto.id}}">{{producto.cantidad}}</td>
               <td>
-                  <button class="boton" >Eliminar</button>
-                  <button class="boton"  data-toggle="modal" data-target="#exampleModal">Actualizar</button>
+                  <button class="boton" id="eliminar{{producto.id}}">Eliminar</button>
+                  <button class="boton"  data-toggle="modal" data-target="#exampleModal" onclick="abrirModalProductos(this.id)" id="{{producto.id}}">Actualizar</button>
               </td>
             </tr>
-            <tr>
-              <th scope="row">1</th>
-              <td>Cafe</td>
-              <td>
-                <img src="{{url_for('static', filename='img/hot-tea.png')}}" alt="" style="width: 100px; height: 100px;"> 
-              </td>
-              <td>$1000</td>
-              <td>100</td>
-              <td>
-                  <button class="boton">Eliminar</button>
-                  <button class="boton">Actualizar</button>
-              </td>
-            </tr>
-            <tr>
-              <th scope="row">1</th>
-              <td>Cafe</td>
-              <td>
-                <img src="{{url_for('static', filename='img/hot-tea.png')}}" alt="" style="width: 100px; height: 100px;"> 
-              </td>
-              <td>$1000</td>
-              <td>100</td>
-              <td>
-                  <button class="boton">Eliminar</button>
-                  <button class="boton">Actualizar</button>
-              </td>
-            </tr>
+            {% endfor %}
           </tbody>
         </table>
 
@@ -97,14 +73,16 @@
         </div>
         <div class="modal-body">
           <form action="" class="formularioActualizar" method="POST">
+            <label for="" class="izquierda">Id:</label>
+            <input type="text" readonly id="idForm">
             <label for="" class="izquierda margenSuperior">Nombre:*</label>
-            <input type="text" placeholder="Nombre" required>
+            <input type="text" placeholder="Nombre" required id="nombreForm">
             <label for="" class="izquierda margenSuperior">Precio:*</label>
-            <input type="number" placeholder="Precio" required>
+            <input type="number" placeholder="Precio" required id="precioForm">
             <label for="" class="izquierda margenSuperior">Cantidad:*</label>
-            <input type="number" placeholder="Cantidad" required>
+            <input type="number" placeholder="Cantidad" required id="cantidadForm">
             <label for="" class="margenSuperior">Imagen producto</label>
-            <input type="file" required> 
+            <input type="file" required id="imagenForm"> 
             <input type="submit" value="Guardar cambios" class="boton">
           </form>
         </div>
