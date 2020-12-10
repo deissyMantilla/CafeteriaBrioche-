@@ -1,10 +1,68 @@
-var ventasDia;
+let inicializarControlador = function() {
+  var ventasDia;
 
-window.onload = function() {
-  let hoy = new Date();
-  let fechaString = formatearFecha(hoy);
+  window.onload = function() {
+    inicializarVariables();
+    llenarItemsVenta();
+    establecerEventoCambioFecha();
+  };
+
+  let mostrarDetalles = function(ventaID) {
+    let ventaSeleccionada = ventasDia.find(element => element.id == ventaID);
+    document.getElementById('total').innerHTML = ventaSeleccionada.total;
+  };
+  
+};
+
+var inicializarVariables = function() {
+  var hoy = new Date();
+  var fechaString = formatearFecha(hoy);
   document.getElementById('fechaBalance').value = fechaString;
-  ventasDia = [
+  ventasDia = consultarVentasPorFecha(fechaString);
+};
+
+let formatearFecha = function(date) {
+  var year = date.getFullYear().toString();
+  var month = (date.getMonth() + 1).toString();
+  var day = date.getDate().toString();
+  if(month.length == 1)
+    month = "0" + month;
+  if(day.length == 1)
+    day = "0" + day;
+  return year + "-" + month + "-" + day;
+};
+
+var llenarItemsVenta = function() {
+  console.log(ventasDia.length);
+  document.getElementById('ventaID1').innerHTML = ventasDia.find(element => element.id == 415).id;
+  document.getElementById('ventaTotal1').innerHTML = ventasDia.find(element => element.id == 415).total;
+
+  document.getElementById('ventaID2').innerHTML = ventasDia.find(element => element.id == 416).id;
+  document.getElementById('ventaTotal2').innerHTML = ventasDia.find(element => element.id == 416).total;
+
+  document.getElementById('ventaID3').innerHTML = ventasDia.find(element => element.id == 417).id;
+  document.getElementById('ventaTotal3').innerHTML = ventasDia.find(element => element.id == 417).total;
+};
+
+var establecerEventoCambioFecha = function() {
+  let mydate = window.document.getElementById("fechaBalance");
+  let olddate = mydate.value;
+  let isChanged = function(){
+    if(mydate.value!== olddate){
+      olddate=mydate.value;
+      return true;
+    };
+    return false;
+  };
+  mydate.addEventListener("change", function(){
+    if(isChanged())
+      alert("Consultando el balance del día " + mydate.value + " en la base de datos...");
+  });
+};
+
+let consultarVentasPorFecha = function(fecha) {
+  //Proximamente se retornará la consulta a la base de datos con la fecha especificada
+  return [
     {
       "id" : "415",
       "total" : "$25.000",
@@ -54,44 +112,6 @@ window.onload = function() {
       ]
     }
   ];
-
-  document.getElementById('ventaID1').innerHTML = ventasDia.find(element => element.id == 415).id;
-  document.getElementById('ventaTotal1').innerHTML = ventasDia.find(element => element.id == 415).total;
-
-  document.getElementById('ventaID2').innerHTML = ventasDia.find(element => element.id == 416).id;
-  document.getElementById('ventaTotal2').innerHTML = ventasDia.find(element => element.id == 416).total;
-
-  document.getElementById('ventaID3').innerHTML = ventasDia.find(element => element.id == 417).id;
-  document.getElementById('ventaTotal3').innerHTML = ventasDia.find(element => element.id == 417).total;
-
-  let mydate = window.document.getElementById("fechaBalance");
-  let olddate = mydate.value;
-  let isChanged = function(){
-    if(mydate.value!== olddate){
-      olddate=mydate.value;
-      return true;
-    };
-    return false;
-  };
-  mydate.addEventListener("change", function(){
-    if(isChanged())
-      alert("Consultando el balance del día " + mydate.value + " en la base de datos...");
-  });
-
 };
 
-let mostrarDetalles = function(ventaID) {
-  let ventaSeleccionada = ventasDia.find(element => element.id == ventaID);
-  document.getElementById('total').innerHTML = ventaSeleccionada.total;
-};
-
-let formatearFecha = function(date) {
-  var year = date.getFullYear().toString();
-  var month = (date.getMonth() + 1).toString();
-  var day = date.getDate().toString();
-  if(month.length == 1)
-    month = "0" + month;
-  if(day.length == 1)
-    day = "0" + day;
-  return year + "-" + month + "-" + day;
-};
+inicializarControlador();
