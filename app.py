@@ -37,6 +37,8 @@ def recuperarPass():
 def registroCajero():
     if request.method == 'GET':
         return render_template('html/registroCajero.html')
+    if request.method == 'POST':  
+      return render_template('html/registroCajero.html')
 
 
 @app.route("/registroProducto", methods=['GET', 'POST'])
