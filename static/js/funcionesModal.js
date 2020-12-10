@@ -54,3 +54,12 @@ identificacionForm.value = identificacion;
 
 
  }
+
+  function confirmacion(exito){
+      console.log(exito)
+    /*  if (exito){
+         alert('Producto actualizado con exito!')
+     }else{
+         alert('Error actualizando el producto, por favor intente nuevamente')
+     } */
+ } 

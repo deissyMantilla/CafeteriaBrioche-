@@ -13,7 +13,13 @@
     />
     <script src="{{url_for('static', filename='js/funcionesModal.js')}}"></script>
   </head>
-<body>
+  {% if exitoso == "enviado" %}
+  <body onload="alert('cambios guardados')">
+  {% elif exitoso == "error" %}
+    <body onload="alert('intente nuevamente')">
+    {% else %}
+    <body>
+  {% endif %}
   <nav class="nav">
     <img src="{{url_for('static', filename='img/latte.png')}}" alt="">
     <a href="registroProducto" class="nav-link active">Registrar Producto</a>
@@ -68,7 +74,7 @@
           </button>
         </div>
         <div class="modal-body">
-          <form action="">
+          <form action="" method="POST">
             <label for="" class="margenSuperior">Id:(*)</label>
             <input type="text" readonly id="idForm" class="form-control">
           <!--nombre-->

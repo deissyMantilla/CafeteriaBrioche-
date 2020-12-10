@@ -37,8 +37,8 @@ def recuperarPass():
 def registroCajero():
     if request.method == 'GET':
         return render_template('html/registroCajero.html')
-    if request.method == 'POST':  
-      return render_template('html/registroCajero.html')
+    if request.method == 'POST':
+        return render_template('html/registroCajero.html')
 
 
 @app.route("/registroProducto", methods=['GET', 'POST'])
@@ -54,7 +54,8 @@ def cajeros():
     if request.method == 'GET':
         return render_template('html/usuarios.html', cajeros=cajeros)
     if request.method == 'POST':
-        return render_template('html/usuarios.html', cajeros=cajeros)
+        return render_template('html/usuarios.html', cajeros=cajeros, exitoso="enviado")
+    # variable exitoso para activar alerta de confirmacion
 
 
 @app.route('/productos', methods=['GET', 'POST'])
@@ -64,7 +65,8 @@ def productos():
     if request.method == 'GET':
         return render_template('html/productos.html', productos=productos)
     if request.method == 'POST':
-        return render_template('html/productos.html', productos=productos)
+        return render_template('html/productos.html', productos=productos, exito="enviado")
+    # variable exito para activar alerta de confirmacion
 
 
 @app.route('/ventas', methods=['GET', 'POST'])
