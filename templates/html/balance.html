@@ -188,6 +188,20 @@
         document.getElementById('ventaID3').innerHTML = ventasDia.find(element => element.id == 417).id;
         document.getElementById('ventaTotal3').innerHTML = ventasDia.find(element => element.id == 417).total;
 
+        let mydate = window.document.getElementById("fechaBalance");
+        let olddate = mydate.value;
+        let isChanged = function(){
+          if(mydate.value!== olddate){
+            olddate=mydate.value;
+            return true;
+          };
+          return false;
+        };
+        mydate.addEventListener("change", function(){
+          if(isChanged())
+            alert("Llamar servicio GET para obtener balance del día!");
+        });
+
       };
 
       let mostrarDetalles = function(ventaID) {
@@ -205,6 +219,7 @@
           day = "0" + day;
         return year + "-" + month + "-" + day;
       };
+
     </script>
 
 </body>
