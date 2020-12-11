@@ -9,6 +9,8 @@
       href="https://fonts.googleapis.com/css2?family=Montserrat&family=Montserrat+Alternates&display=swap"
       rel="stylesheet"
     />
+    <script src="{{url_for('static', filename='js/funcionesModal.js')}}"></script>
+ 
 </head>
 <body>
     <div class="contene">
@@ -16,7 +18,7 @@
         <div>Ingresar con el correo de registro para recuperar contraseña</div><br>
        <form action="" method="POST">
            <input name='email' type="email" placeholder="Correo electrónico" class="inputForm" required><br>
-           <input type="submit" value="Recuperar contraseña" class="botonRecuperar" ><br>
+           <input type="submit" value="Recuperar contraseña" class="botonRecuperar"  ><br>
        </form>
     </div>
 </body>

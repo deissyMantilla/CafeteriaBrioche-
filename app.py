@@ -56,6 +56,17 @@ def registroCajero():
     if request.method == 'GET':
         return render_template('html/registroCajero.html')
     if request.method == 'POST':
+        # Registro en base de datos
+
+        # Envio correo electronico con informacion de registro
+        nombre = request.form['nombre']
+        email = request.form['email']
+        password = request.form['pass']
+        msg = Message('Registro - Cafeteria Brioche', sender='deissymantilla04@gmail.com',
+                      recipients=[email])
+        msg.body = "Hola " + nombre + ", este es un mensaje enviado por la cafeteria Brioche, has sido registrado con cajero en la cafeteria.  Tu usuario es: " + \
+            email+" y tu contraseña es: "+password
+        mail.send(msg)
         return render_template('html/registroCajero.html')
 
 
@@ -83,6 +94,7 @@ def productos():
     if request.method == 'GET':
         return render_template('html/productos.html', productos=productos)
     if request.method == 'POST':
+        # envio a db
         return render_template('html/productos.html', productos=productos, exito="enviado")
     # variable exito para activar alerta de confirmacion
 
