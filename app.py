@@ -1,6 +1,19 @@
 from flask import Flask, redirect, url_for, render_template, request
+from flask_mail import Mail, Message
 
 app = Flask(__name__)
+
+
+# Se configura las propiedades de envio de correos
+app.config['DEBUG'] = True
+app.config['MAIL_SERVER'] = 'smtp.gmail.com'
+app.config['MAIL_PORT'] = 465
+app.config['MAIL_USERNAME'] = 'deissymantilla04@gmail.com'
+app.config['MAIL_PASSWORD'] = 'wylzhjhpycdjzqvj'
+app.config['MAIL_USE_TLS'] = False
+app.config['MAIL_USE_SSL'] = True
+
+mail = Mail(app)
 
 
 @app.route('/', methods=['GET'])
@@ -30,6 +43,11 @@ def recuperarPass():
     if request.method == 'GET':
         return render_template('html/recuperaContrasenia.html')
     if request.method == 'POST':
+        email = request.form['email']
+        msg = Message('Recuperar contraseña Cafeteria Brioche', sender='deissymantilla04@gmail.com',
+                      recipients=[email])
+        msg.body = "Hola este es un mensaje enviado por la cafeteria Brioche, tu contraseña es: "
+        mail.send(msg)
         return redirect(url_for('loginCajero'))
 
 
