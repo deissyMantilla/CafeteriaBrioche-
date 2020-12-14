@@ -1,5 +1,7 @@
 from flask import Flask, redirect, url_for, render_template, request
 from flask_mail import Mail, Message
+import sqlite3
+import time
 
 app = Flask(__name__)
 
@@ -78,9 +80,12 @@ def registroProducto():
 
 @app.route('/cajeros', methods=['GET', 'POST'])
 def cajeros():
-    cajeros = [{'id': '1', 'nombre': 'Camila', 'apellido': 'sanchez', 'edad': '20', 'identificacion': '12345',
-                'direccion': 'cale123', 'correo': 'lo@lo.com', 'genero': 'Femenino', 'contraseña': '12345', 'imagen': 'imagen'}]
     if request.method == 'GET':
+        con = sqlite3.connect("brioche.db")
+        con.row_factory = sqlite3.Row
+        cur = con.cursor()
+        cur.execute("select * from usuarios")
+        cajeros = cur.fetchall()
         return render_template('html/usuarios.html', cajeros=cajeros)
     if request.method == 'POST':
         return render_template('html/usuarios.html', cajeros=cajeros, exitoso="enviado")
@@ -89,14 +94,42 @@ def cajeros():
 
 @app.route('/productos', methods=['GET', 'POST'])
 def productos():
-    productos = [{'id': '1', 'nombre': 'cafe', 'precio': '1000',
-                  'cantidad': '100', 'img': 'img/hot-tea.png'}, {"id": "2", "nombre": "Capuchino", "precio": "2000", "cantidad": "100", 'img': 'img/hot-tea.png'}]
+    # Se piden los datos de productos a la base de datos
+
     if request.method == 'GET':
+        productos = peticion()
         return render_template('html/productos.html', productos=productos)
     if request.method == 'POST':
-        # envio a db
-        return render_template('html/productos.html', productos=productos, exito="enviado")
+        # se toman los los datos del formulario para enviarlos a la base de datos
+        idProducto = request.form['id']
+        Nombre = request.form['nombre']
+        Precio = request.form['precio']
+        Cantidad = request.form['cantidad']
+        #URLimagen = request.form['URLimagen']
+
+        # se envian los datos a la base de datos
+        with sqlite3.connect("brioche.db") as con:
+            try:
+                cur = con.cursor()
+                cur.execute("update productos set Nombre=' "+Nombre+"', Precio='" +
+                            Precio+"', Cantidad='"+Cantidad+"' where id = "+idProducto)
+                exito = "enviado"
+            except:
+                exito = "error"
+            finally:
+                product = peticion()
+                return render_template('html/productos.html', productos=product, exito=exito)
+
     # variable exito para activar alerta de confirmacion
+
+
+def peticion():
+    con = sqlite3.connect("brioche.db")
+    con.row_factory = sqlite3.Row
+    cur = con.cursor()
+    cur.execute("select * from productos")
+    productos = cur.fetchall()
+    return productos
 
 
 @app.route('/ventas', methods=['GET', 'POST'])
