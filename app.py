@@ -31,10 +31,12 @@ def login():
         return redirect(url_for('productos'))
 
 
-@app.route("/loginCajero", methods=['GET', 'POST'])
-def loginCajero():
+@app.route("/loginCajero", defaults={'exitoso': None}, methods=['GET', 'POST'])
+@app.route("/loginCajero/<exitoso>", methods=['GET', 'POST'])
+def loginCajero(exitoso):
     if request.method == 'GET':
-        return render_template('html/loginCajero.html')
+        print(exitoso)
+        return render_template('html/loginCajero.html', exitoso=exitoso)
     if request.method == 'POST':
         return redirect(url_for('ventas'))
 
@@ -64,12 +66,11 @@ def recuperarPass(exitoso):
                     str(contrase)
                 mail.send(msg)
                 exitoso = 'enviado'
-
-                # Falta poner alerta donde se indique que el correo fue enviado
-                return redirect(url_for('loginCajero'))
+                # se redirige a la pagina de login
+                return redirect(url_for('loginCajero', exitoso=exitoso))
         else:
             exitoso = 'error'
-            # return render_template('html/recuperaContrasenia.html', exitoso=exitoso)
+            # si hay un error se vuelve a cargar la pagina de recuperar contraseña pero con una alerta de error
             return redirect(url_for('recuperarPass', exitoso=exitoso))
 
 

@@ -12,11 +12,10 @@
     <link href="{{url_for('static', filename='css/stylesLogin.css')}}" rel="stylesheet">
   
   </head>
+    
   {% if exitoso == "enviado" %}
-  <body onload="alert('correo enviado')">
-  {% elif exitoso == "error" %}
-    <body onload="alert('correo no registrado, intente nuevamente')">
-    {% else %}
+  <body onload="alert('Se ha enviado un correo con la información de su contraseña')">
+   {% else %}
     <body>
   {% endif %}
     <div class="cuadroLogin" >
