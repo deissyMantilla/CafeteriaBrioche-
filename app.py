@@ -113,13 +113,17 @@ def cajeros():
     # variable exitoso para activar alerta de confirmacion
 
 
-@app.route('/productos', methods=['GET', 'POST'])
-def productos():
+@app.route('/productos', defaults={'exito': None}, methods=['GET', 'POST'])
+@app.route('/productos/<exito>',  methods=['GET', 'POST'])
+def productos(exito):
     # Se piden los datos de productos a la base de datos
-
     if request.method == 'GET':
-        productos = peticion()
-        return render_template('html/productos.html', productos=productos)
+        con = sqlite3.connect("brioche.db")
+        con.row_factory = sqlite3.Row
+        cur = con.cursor()
+        cur.execute("select * from productos")
+        productos = cur.fetchall()
+        return render_template('html/productos.html', productos=productos, exito=exito)
     if request.method == 'POST':
         # se toman los los datos del formulario para enviarlos a la base de datos
         idProducto = request.form['id']
@@ -138,19 +142,9 @@ def productos():
             except:
                 exito = "error"
             finally:
-                product = peticion()
-                return render_template('html/productos.html', productos=product, exito=exito)
+                return redirect(url_for('productos', exito=exito))
 
     # variable exito para activar alerta de confirmacion
-
-
-def peticion():
-    con = sqlite3.connect("brioche.db")
-    con.row_factory = sqlite3.Row
-    cur = con.cursor()
-    cur.execute("select * from productos")
-    productos = cur.fetchall()
-    return productos
 
 
 @app.route('/ventas', methods=['GET', 'POST'])
