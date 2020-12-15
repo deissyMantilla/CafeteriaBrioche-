@@ -12,7 +12,11 @@
     <script src="{{url_for('static', filename='js/funcionesModal.js')}}"></script>
  
 </head>
-<body>
+{% if exitoso == "error" %}
+    <body onload="alert('correo no registrado, intente nuevamente')">
+    {% else %}
+    <body>
+  {% endif %}
     <div class="contene">
         <h1>Recuperar contraseña</h1>
         <div>Ingresar con el correo de registro para recuperar contraseña</div><br>

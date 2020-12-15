@@ -46,11 +46,30 @@ def recuperarPass():
         return render_template('html/recuperaContrasenia.html')
     if request.method == 'POST':
         email = request.form['email']
-        msg = Message('Recuperar contraseña Cafeteria Brioche', sender='deissymantilla04@gmail.com',
-                      recipients=[email])
-        msg.body = "Hola este es un mensaje enviado por la cafeteria Brioche, tu contraseña es: "
-        mail.send(msg)
-        return redirect(url_for('loginCajero'))
+        # se verifica si el email esta en la base de datos
+        con = sqlite3.connect("brioche.db")
+        con.row_factory = sqlite3.Row
+        cur = con.cursor()
+        cur.execute(
+            "select Correo, Contraseña from usuarios where Correo = '"+email+"'")
+        respuesta = cur.fetchmany()
+        if respuesta:
+            correo = respuesta[0][0]
+            contrase = respuesta[0][1]
+            # se envia correo electronico
+            if correo == email:
+                msg = Message('Recuperar contraseña Cafeteria Brioche', sender='deissymantilla04@gmail.com',
+                              recipients=[email])
+                msg.body = "Hola este es un mensaje enviado por la cafeteria Brioche, tu contraseña es: " + \
+                    str(contrase)
+                mail.send(msg)
+                exitoso = 'enviado'
+
+                # Falta poner alerta donde se indique que el correo fue enviado
+                return redirect(url_for('loginCajero'))
+        else:
+            exitoso = 'error'
+            return render_template('html/recuperaContrasenia.html', exitoso=exitoso)
 
 
 @app.route("/registroCajero", methods=['GET', 'POST'])

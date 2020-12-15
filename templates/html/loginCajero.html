@@ -12,8 +12,14 @@
     <link href="{{url_for('static', filename='css/stylesLogin.css')}}" rel="stylesheet">
   
   </head>
-  <body>
-    <div class="cuadroLogin">
+  {% if exitoso == "enviado" %}
+  <body onload="alert('correo enviado')">
+  {% elif exitoso == "error" %}
+    <body onload="alert('correo no registrado, intente nuevamente')">
+    {% else %}
+    <body>
+  {% endif %}
+    <div class="cuadroLogin" >
       <h3 class="ingresaLabel">Ingresa a la plataforma</h3>
       <form action="" class="formularioLogin" method="POST">
         <input type="email" placeholder="Correo electronico" class="inputFormulario" required/>
