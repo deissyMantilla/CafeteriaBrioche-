@@ -1,7 +1,6 @@
 from flask import Flask, redirect, url_for, render_template, request
 from flask_mail import Mail, Message
 import sqlite3
-import time
 
 app = Flask(__name__)
 
@@ -40,10 +39,11 @@ def loginCajero():
         return redirect(url_for('ventas'))
 
 
-@app.route("/recuperarPass", methods=['GET', 'POST'])
-def recuperarPass():
+@app.route("/recuperarPass", defaults={'exitoso': None}, methods=['GET', 'POST'])
+@app.route("/recuperarPass/<exitoso>", methods=['GET', 'POST'])
+def recuperarPass(exitoso):
     if request.method == 'GET':
-        return render_template('html/recuperaContrasenia.html')
+        return render_template('html/recuperaContrasenia.html', exitoso=exitoso)
     if request.method == 'POST':
         email = request.form['email']
         # se verifica si el email esta en la base de datos
@@ -69,7 +69,8 @@ def recuperarPass():
                 return redirect(url_for('loginCajero'))
         else:
             exitoso = 'error'
-            return render_template('html/recuperaContrasenia.html', exitoso=exitoso)
+            # return render_template('html/recuperaContrasenia.html', exitoso=exitoso)
+            return redirect(url_for('recuperarPass', exitoso=exitoso))
 
 
 @app.route("/registroCajero", methods=['GET', 'POST'])
