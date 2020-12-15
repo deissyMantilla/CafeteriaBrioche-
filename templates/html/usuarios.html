@@ -13,20 +13,20 @@
     />
     <script src="{{url_for('static', filename='js/funcionesModal.js')}}"></script>
   </head>
-  {% if exitoso == "enviado" %}
+  {% if exito == "enviado" %}
   <body onload="alert('cambios guardados')">
-  {% elif exitoso == "error" %}
+  {% elif exito == "error" %}
     <body onload="alert('intente nuevamente')">
     {% else %}
     <body>
   {% endif %}
   <nav class="nav">
     <img src="{{url_for('static', filename='img/latte.png')}}" alt="">
-    <a href="registroProducto" class="nav-link active">Registrar Producto</a>
-    <a href="registroCajero" class="nav-link">Registar cajero</a>
-    <a href="productos" class="nav-link">Productos</a>
-    <a href="cajeros" class="nav-link">Cajeros</a>
-    <a href="balance" class="nav-link">Balance</a>
+    <a href="{{url_for('registroProducto')}}" class="nav-link active">Registrar Producto</a>
+    <a href="{{url_for('registroCajero')}}" class="nav-link">Registar cajero</a>
+    <a href="{{url_for('productos')}}" class="nav-link">Productos</a>
+    <a href="{{url_for('cajeros')}}" class="nav-link">Cajeros</a>
+    <a href="{{url_for('balance')}}" class="nav-link">Balance</a>
     <a href="/" class="nav-link">Cerrar sesión</a>
 </nav>
   <div class="contenedorTabla">
@@ -76,44 +76,44 @@
         <div class="modal-body">
           <form action="" method="POST">
             <label for="" class="margenSuperior">Id:(*)</label>
-            <input type="text" readonly id="idForm" class="form-control">
+            <input name="idForm" type="text" readonly id="idForm" class="form-control">
           <!--nombre-->
             <label for="nombre" class="margenSuperior"> Nombre: (*)</label><br>
-            <input type="text" class="form-control" id="nombreForm" placeholder="Ingrese nombre Cajero" required>
+            <input name='nombre' type="text" class="form-control" id="nombreForm" placeholder="Ingrese nombre Cajero" required>
         <!--apellido-->
             <label for="apellido" class="margenSuperior">Apellido:</label><br>
-            <input type="text" class="form-control" id="apellidoForm" placeholder="Ingrese Apellidos Cajero">
+            <input name="apellido" type="text" class="form-control" id="apellidoForm" placeholder="Ingrese Apellidos Cajero">
         <!--edad-->
             <label for="edad" class="margenSuperior">Edad:</label><br>
-            <input type="number" min="18" class="form-control" id="edadForm" placeholder="Ingrese Edad Cajero">
+            <input name="edad" type="number" min="18" class="form-control" id="edadForm" placeholder="Ingrese Edad Cajero">
         <!--identificacion-->
             <label for="identificacion" class="margenSuperior">Identificación:</label><br>
-            <input type="number" min="1" maxlength="10" class="form-control" id="identificacionForm"
+            <input name="identificacion" type="number" min="1" maxlength="10" class="form-control" id="identificacionForm"
                 placeholder="Ingrese Identificación Cajero">
         <!--direccion-->
             <label for="direccion" class="margenSuperior">Dirección:</label><br>
-            <input type="text" class="form-control" id="direccionForm" placeholder="Ingrese Dirección Cajero">
+            <input name="direccion" type="text" class="form-control" id="direccionForm" placeholder="Ingrese Dirección Cajero">
         <!--correo electronico-->
         
             <label for="email" class="margenSuperior">Correo Electronico:(*)</label><br>
-            <input type="email" class="form-control" id="emailForm" placeholder="Ingrese Correo Electronico Cajero"
+            <input name="email" type="email" class="form-control" id="emailForm" placeholder="Ingrese Correo Electronico Cajero"
                 required>
         
         <!--combobox de genero-->
         
             <label for="genero" class="margenSuperior">Genero:</label><br>
-            <select name="genero" id="generoForm" class="margenDerecha" >
+            <select name="genero" name="genero" id="generoForm" class="margenDerecha" >
                 <option value="M">Masculino</option>
                 <option value="F">Femenino</option>
                 <option value="O">Otros</option>
             </select>
         
                 <label for="contraseña" class="margenSuperior" >Contraseña:(*)</label><br>
-                    <input type="password" class="form-control" id="contrasenaForm" placeholder="Ingrese Contraseña"
+                    <input name="password" type="password" class="form-control" id="contrasenaForm" placeholder="Ingrese Contraseña"
                         required>
             
             <label for="imagen" class="margenSuperior">Cargar Imagen:</label>
-            <input type="file" class="form-control " id="imagenForm">
+            <!-- <input type="file" class="form-control " id="imagenForm"> -->
             <input type="submit" value="Guardar cambios" class="boton">
     </form>
 

@@ -18,13 +18,13 @@
   <body>
     <nav class="nav">
       <img src="{{url_for('static', filename='img/latte.png')}}" alt="">
-      <a href="registroProducto" class="nav-link active">Registrar Producto</a>
-      <a href="registroCajero" class="nav-link">Registar cajero</a>
-      <a href="productos" class="nav-link">Productos</a>
-      <a href="cajeros" class="nav-link">Cajeros</a>
-      <a href="balance" class="nav-link">Balance</a>
+      <a href="{{url_for('registroProducto')}}" class="nav-link active">Registrar Producto</a>
+      <a href="{{url_for('registroCajero')}}" class="nav-link">Registar cajero</a>
+      <a href="{{url_for('productos')}}" class="nav-link">Productos</a>
+      <a href="{{url_for('cajeros')}}" class="nav-link">Cajeros</a>
+      <a href="{{url_for('balance')}}" class="nav-link">Balance</a>
       <a href="/" class="nav-link">Cerrar sesión</a>
-    </nav>
+  </nav>
     <div class="contenedorTabla">    
       <table class="table">      
           <thead>

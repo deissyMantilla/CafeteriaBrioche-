@@ -99,17 +99,42 @@ def registroProducto():
         return render_template('html/registroProducto.html')
 
 
-@app.route('/cajeros', methods=['GET', 'POST'])
-def cajeros():
+@app.route('/cajeros', defaults={'exito': None}, methods=['GET', 'POST'])
+@app.route('/cajeros/<exito>', methods=['GET', 'POST'])
+def cajeros(exito):
     if request.method == 'GET':
         con = sqlite3.connect("brioche.db")
         con.row_factory = sqlite3.Row
         cur = con.cursor()
         cur.execute("select * from usuarios")
         cajeros = cur.fetchall()
-        return render_template('html/usuarios.html', cajeros=cajeros)
+        return render_template('html/usuarios.html', cajeros=cajeros, exito=exito)
     if request.method == 'POST':
-        return render_template('html/usuarios.html', cajeros=cajeros, exitoso="enviado")
+        # se traen los datos del formulario
+        idUsuario = request.form['idForm']
+        nombre = request.form['nombre']
+        apellido = request.form['apellido']
+        edad = request.form['edad']
+        identificacion = request.form['identificacion']
+        direccion = request.form['direccion']
+        email = request.form['email']
+        genero = request.form['genero']
+        password = request.form['password']
+        # queda pendiente la imagen
+
+        # se envian los datos a la base de datos
+        with sqlite3.connect("brioche.db") as con:
+            try:
+                cur = con.cursor()
+                cur.execute("update usuarios set Nombre=?, Apellido=?, Edad=?, Identificacion=?,Genero=?, Correo=?, Contraseña=?, Direccion=? where id=?",
+                            (nombre, apellido, edad, identificacion, genero, email, password, direccion, idUsuario))
+                con.commit()
+                exito = "enviado"
+            except:
+                exito = "error"
+            finally:
+                return redirect(url_for('cajeros', exito=exito))
+
     # variable exitoso para activar alerta de confirmacion
 
 
@@ -130,7 +155,7 @@ def productos(exito):
         Nombre = request.form['nombre']
         Precio = request.form['precio']
         Cantidad = request.form['cantidad']
-        #URLimagen = request.form['URLimagen']
+        # URLimagen = request.form['URLimagen']
 
         # se envian los datos a la base de datos
         with sqlite3.connect("brioche.db") as con:
