@@ -144,16 +144,28 @@ def registroProducto(exito):
                 return redirect(url_for('registroProducto', exito=exito))
 
 
-@app.route('/cajeros', defaults={'exito': None}, methods=['GET', 'POST'])
-@app.route('/cajeros/<exito>', methods=['GET', 'POST'])
-def cajeros(exito):
+@app.route('/cajeros', defaults={'exito': None, 'idP': None}, methods=['GET', 'POST'])
+@app.route('/cajeros/<exito>', defaults={'idP': None}, methods=['GET', 'POST'])
+@app.route('/cajeros/<idP>', defaults={'exito': None}, methods=['GET', 'POST'])
+def cajeros(exito, idP):
     if request.method == 'GET':
-        con = sqlite3.connect("brioche.db")
-        con.row_factory = sqlite3.Row
-        cur = con.cursor()
-        cur.execute("select * from usuarios")
-        cajeros = cur.fetchall()
-        return render_template('html/usuarios.html', cajeros=cajeros, exito=exito)
+        if idP:
+            with sqlite3.connect("brioche.db") as con:
+                try:
+                    cur = con.cursor()
+                    cur.execute("delete from usuarios where id = ?", idP)
+                except:
+                    exito = 'error'
+                finally:
+                    return redirect(url_for('cajeros'))
+
+        else:
+            con = sqlite3.connect("brioche.db")
+            con.row_factory = sqlite3.Row
+            cur = con.cursor()
+            cur.execute("select * from usuarios")
+            cajeros = cur.fetchall()
+            return render_template('html/usuarios.html', cajeros=cajeros, exito=exito)
     if request.method == 'POST':
         # se traen los datos del formulario
         idUsuario = request.form['idForm']
@@ -194,9 +206,8 @@ def productos(exito, idP):
                 try:
                     cur = con.cursor()
                     cur.execute("delete from productos where id = ?", idP)
-                    print("record successfully deleted")
                 except:
-                    print("can't be deleted")
+                    exito = 'error'
                 finally:
                     return redirect(url_for('productos'))
         else:

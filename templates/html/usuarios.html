@@ -53,8 +53,8 @@
             <td id="correo{{cajero.id}}">{{cajero.correo}}</td>
             <td id="identificacion{{cajero.id}}">{{cajero.identificacion}}</td>
             <td>
-                <button class="boton" id="eliminar{{cajero.id}}">Eliminar</button>
-                <button class="boton" data-toggle="modal" data-target="#exampleModal" onclick="abrirModalCajeros(this.id)" id="{{cajero.id}}">Actualizar</button>
+              <a href="/cajeros/{{cajero.id}}" class="boton " id="{{cajero.id}}" >Eliminar</a> 
+              <button class="boton" data-toggle="modal" data-target="#exampleModal" onclick="abrirModalCajeros(this.id)" id="{{cajero.id}}">Actualizar</button>
             </td>
           </tr>
           {% endfor%}
