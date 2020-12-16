@@ -1,9 +1,9 @@
-from flask import Flask, redirect, url_for, render_template, request
+from flask import Flask, redirect, url_for, render_template, request, session
 from flask_mail import Mail, Message
 import sqlite3
 
 app = Flask(__name__)
-
+app.secret_key = 'brioche123'
 
 # Se configura las propiedades de envio de correos
 app.config['DEBUG'] = True
@@ -28,6 +28,11 @@ def login():
     if request.method == 'GET':
         return render_template('html/loginAdmin.html')
     if request.method == 'POST':
+        username = request.form['username']
+        password = request.form['password']
+        # Falta validar la contraseña
+        session['username'] = username
+        session['rol'] = 'admin'
         return redirect(url_for('productos'))
 
 
@@ -77,121 +82,120 @@ def recuperarPass(exitoso):
 @app.route("/registroCajero", defaults={'exito': None}, methods=['GET', 'POST'])
 @app.route("/registroCajero/<exito>", methods=['GET', 'POST'])
 def registroCajero(exito):
-    if request.method == 'GET':
-        return render_template('html/registroCajero.html', exito=exito)
-    if request.method == 'POST':
+    if 'username' in session and session['rol'] == 'admin':
+        if request.method == 'GET':
+            return render_template('html/registroCajero.html', exito=exito)
+        if request.method == 'POST':
 
-        # Registro en base de datos
-        with sqlite3.connect("brioche.db") as con:
-            try:
-                print('Entró al try')
-                nombre = request.form["nombre"]
-                apellido = request.form["apellido"]
-                correo = request.form["email"]
-                edad = request.form["edad"]
-                identificacion = request.form["identificacion"]
-                direccion = request.form["direccion"]
-                genero = request.form["genero"]
-                contraseña = request.form["pass"]
-                #URLimagen = request.form["URLimagen"]
-                cur = con.cursor()
-                cur.execute("INSERT INTO usuarios (Nombre, Apellido, Correo, Edad, Identificacion, Direccion, Genero,Contraseña) VALUES ('" +
-                            nombre+"','"+apellido+"','"+correo+"','"+edad+"','"+identificacion+"','"+direccion+"','"+genero+"','"+contraseña+"')")
-                con.commit()
-                exito = 'enviado'
-                # Envio correo electronico con informacion de registro
-                nombre = request.form['nombre']
-                email = request.form['email']
-                password = request.form['pass']
-                msg = Message('Registro - Cafeteria Brioche',
-                              sender='deissymantilla04@gmail.com', recipients=[email])
-                msg.body = "Hola " + nombre + ", este es un mensaje enviado por la cafeteria Brioche, has sido registrado como cajero en la cafeteria.  Tu usuario es: " + \
-                    email+" y tu contraseña es: "+password
-                mail.send(msg)
-            except:
-                exito = 'error'
-                print('Error')
-            finally:
-                print('finally print')
-                return redirect(url_for('registroCajero', exito=exito))
+            # Registro en base de datos
+            with sqlite3.connect("brioche.db") as con:
+                try:
+                    nombre = request.form["nombre"]
+                    apellido = request.form["apellido"]
+                    correo = request.form["email"]
+                    edad = request.form["edad"]
+                    identificacion = request.form["identificacion"]
+                    direccion = request.form["direccion"]
+                    genero = request.form["genero"]
+                    contraseña = request.form["pass"]
+                    # URLimagen = request.form["URLimagen"]
+                    cur = con.cursor()
+                    cur.execute("INSERT INTO usuarios (Nombre, Apellido, Correo, Edad, Identificacion, Direccion, Genero,Contraseña) VALUES ('" +
+                                nombre+"','"+apellido+"','"+correo+"','"+edad+"','"+identificacion+"','"+direccion+"','"+genero+"','"+contraseña+"')")
+                    con.commit()
+                    exito = 'enviado'
+                    # Envio correo electronico con informacion de registro
+                    nombre = request.form['nombre']
+                    email = request.form['email']
+                    password = request.form['pass']
+                    msg = Message('Registro - Cafeteria Brioche',
+                                  sender='deissymantilla04@gmail.com', recipients=[email])
+                    msg.body = "Hola " + nombre + ", este es un mensaje enviado por la cafeteria Brioche, has sido registrado como cajero en la cafeteria.  Tu usuario es: " + \
+                        email+" y tu contraseña es: "+password
+                    mail.send(msg)
+                except:
+                    exito = 'error'
+                finally:
+                    return redirect(url_for('registroCajero', exito=exito))
+    else:
+        return redirect(url_for('home'))
 
 
 @app.route("/registroProducto", defaults={'exito': None}, methods=['GET', 'POST'])
 @app.route("/registroProducto/<exito>", methods=['GET', 'POST'])
 def registroProducto(exito):
-    if request.method == 'GET':
-        return render_template('html/registroProducto.html', exito=exito)
-    if request.method == 'POST':
-        with sqlite3.connect("brioche.db") as con:
-            try:
-                nombre = request.form["nombre"]
-                precio = request.form["precio"]
-                cantidad = request.form["cantidad"]
-                cur = con.cursor()
-                cur.execute(
-                    "INSERT INTO productos (nombre, precio,cantidad) VALUES ('"+nombre+"','"+precio+"','"+cantidad+"')")
-                con.commit()
-                exito = 'enviado'
-            except:
-                exito = 'error'
-                print('Error')
-            finally:
-                #alert('Estado: '+msg)
-                # return render_template("productos.html")
-                # return render_template("productos.html",msg = msg)
-                #alert('Estado: ?',msg)
-                print('finally print')
-                return redirect(url_for('registroProducto', exito=exito))
+    if 'username' in session and session['rol'] == 'admin':
+        if request.method == 'GET':
+            return render_template('html/registroProducto.html', exito=exito)
+        if request.method == 'POST':
+            with sqlite3.connect("brioche.db") as con:
+                try:
+                    nombre = request.form["nombre"]
+                    precio = request.form["precio"]
+                    cantidad = request.form["cantidad"]
+                    cur = con.cursor()
+                    cur.execute(
+                        "INSERT INTO productos (nombre, precio,cantidad) VALUES ('"+nombre+"','"+precio+"','"+cantidad+"')")
+                    con.commit()
+                    exito = 'enviado'
+                except:
+                    exito = 'error'
+                finally:
+                    return redirect(url_for('registroProducto', exito=exito))
+    else:
+        return redirect(url_for('home'))
 
 
 @app.route('/cajeros', defaults={'exito': None, 'idP': None}, methods=['GET', 'POST'])
 @app.route('/cajeros/<exito>', defaults={'idP': None}, methods=['GET', 'POST'])
 @app.route('/cajeros/<idP>', defaults={'exito': None}, methods=['GET', 'POST'])
 def cajeros(exito, idP):
-    if request.method == 'GET':
-        if idP:
+    if 'username' in session and session['rol'] == 'admin':
+        if request.method == 'GET':
+            if idP:
+                with sqlite3.connect("brioche.db") as con:
+                    try:
+                        cur = con.cursor()
+                        cur.execute("delete from usuarios where id = ?", idP)
+                    except:
+                        exito = 'error'
+                    finally:
+                        return redirect(url_for('cajeros'))
+
+            else:
+                con = sqlite3.connect("brioche.db")
+                con.row_factory = sqlite3.Row
+                cur = con.cursor()
+                cur.execute("select * from usuarios")
+                cajeros = cur.fetchall()
+                return render_template('html/usuarios.html', cajeros=cajeros, exito=exito)
+        if request.method == 'POST':
+            # se traen los datos del formulario
+            idUsuario = request.form['idForm']
+            nombre = request.form['nombre']
+            apellido = request.form['apellido']
+            edad = request.form['edad']
+            identificacion = request.form['identificacion']
+            direccion = request.form['direccion']
+            email = request.form['email']
+            genero = request.form['genero']
+            password = request.form['password']
+            # queda pendiente la imagen
+
+            # se envian los datos a la base de datos
             with sqlite3.connect("brioche.db") as con:
                 try:
                     cur = con.cursor()
-                    cur.execute("delete from usuarios where id = ?", idP)
+                    cur.execute("update usuarios set Nombre=?, Apellido=?, Edad=?, Identificacion=?,Genero=?, Correo=?, Contraseña=?, Direccion=? where id=?",
+                                (nombre, apellido, edad, identificacion, genero, email, password, direccion, idUsuario))
+                    con.commit()
+                    exito = "enviado"
                 except:
-                    exito = 'error'
+                    exito = "error"
                 finally:
-                    return redirect(url_for('cajeros'))
-
-        else:
-            con = sqlite3.connect("brioche.db")
-            con.row_factory = sqlite3.Row
-            cur = con.cursor()
-            cur.execute("select * from usuarios")
-            cajeros = cur.fetchall()
-            return render_template('html/usuarios.html', cajeros=cajeros, exito=exito)
-    if request.method == 'POST':
-        # se traen los datos del formulario
-        idUsuario = request.form['idForm']
-        nombre = request.form['nombre']
-        apellido = request.form['apellido']
-        edad = request.form['edad']
-        identificacion = request.form['identificacion']
-        direccion = request.form['direccion']
-        email = request.form['email']
-        genero = request.form['genero']
-        password = request.form['password']
-        # queda pendiente la imagen
-
-        # se envian los datos a la base de datos
-        with sqlite3.connect("brioche.db") as con:
-            try:
-                cur = con.cursor()
-                cur.execute("update usuarios set Nombre=?, Apellido=?, Edad=?, Identificacion=?,Genero=?, Correo=?, Contraseña=?, Direccion=? where id=?",
-                            (nombre, apellido, edad, identificacion, genero, email, password, direccion, idUsuario))
-                con.commit()
-                exito = "enviado"
-            except:
-                exito = "error"
-            finally:
-                return redirect(url_for('cajeros', exito=exito))
-
+                    return redirect(url_for('cajeros', exito=exito))
+    else:
+        return redirect(url_for('home'))
     # variable exitoso para activar alerta de confirmacion
 
 
@@ -199,44 +203,48 @@ def cajeros(exito, idP):
 @app.route('/productos/<exito>', defaults={'idP': None},  methods=['GET', 'POST'])
 @app.route('/productos/<idP>', defaults={'exito': None}, methods=['GET', 'POST'])
 def productos(exito, idP):
-    # Se piden los datos de productos a la base de datos
-    if request.method == 'GET':
-        if idP:
+    # se valida el rol de la sesion
+    if 'username' in session and session['rol'] == 'admin':
+        print('la sesion esta con admin')
+        # Se piden los datos de productos a la base de datos
+        if request.method == 'GET':
+            if idP:
+                with sqlite3.connect("brioche.db") as con:
+                    try:
+                        cur = con.cursor()
+                        cur.execute("delete from productos where id = ?", idP)
+                    except:
+                        exito = 'error'
+                    finally:
+                        return redirect(url_for('productos'))
+            else:
+                con = sqlite3.connect("brioche.db")
+                con.row_factory = sqlite3.Row
+                cur = con.cursor()
+                cur.execute("select * from productos")
+                productos = cur.fetchall()
+                return render_template('html/productos.html', productos=productos, exito=exito)
+        if request.method == 'POST':
+            # se toman los los datos del formulario para enviarlos a la base de datos
+            idProducto = request.form['id']
+            Nombre = request.form['nombre']
+            Precio = request.form['precio']
+            Cantidad = request.form['cantidad']
+            # URLimagen = request.form['URLimagen']
+
+            # se envian los datos a la base de datos
             with sqlite3.connect("brioche.db") as con:
                 try:
                     cur = con.cursor()
-                    cur.execute("delete from productos where id = ?", idP)
+                    cur.execute("update productos set Nombre=' "+Nombre+"', Precio='" +
+                                Precio+"', Cantidad='"+Cantidad+"' where id = "+idProducto)
+                    exito = "enviado"
                 except:
-                    exito = 'error'
+                    exito = "error"
                 finally:
-                    return redirect(url_for('productos'))
-        else:
-            con = sqlite3.connect("brioche.db")
-            con.row_factory = sqlite3.Row
-            cur = con.cursor()
-            cur.execute("select * from productos")
-            productos = cur.fetchall()
-            return render_template('html/productos.html', productos=productos, exito=exito)
-    if request.method == 'POST':
-        # se toman los los datos del formulario para enviarlos a la base de datos
-        idProducto = request.form['id']
-        Nombre = request.form['nombre']
-        Precio = request.form['precio']
-        Cantidad = request.form['cantidad']
-        # URLimagen = request.form['URLimagen']
-
-        # se envian los datos a la base de datos
-        with sqlite3.connect("brioche.db") as con:
-            try:
-                cur = con.cursor()
-                cur.execute("update productos set Nombre=' "+Nombre+"', Precio='" +
-                            Precio+"', Cantidad='"+Cantidad+"' where id = "+idProducto)
-                exito = "enviado"
-            except:
-                exito = "error"
-            finally:
-                return redirect(url_for('productos', exito=exito))
-
+                    return redirect(url_for('productos', exito=exito))
+    else:
+        return redirect(url_for('home'))
     # variable exito para activar alerta de confirmacion
 
 
@@ -255,7 +263,18 @@ def ventas():
 
 @app.route('/balance', methods=['GET'])
 def balance():
-    return render_template('html/balance.html')
+    if 'username' in session and session['rol'] == 'admin':
+        return render_template('html/balance.html')
+    else:
+        return redirect(url_for('home'))
+
+
+@app.route("/cerrarSesion", methods=['GET'])
+def cerrarSesion():
+    if 'username' in session:
+        session.pop('username')
+        session.pop('rol')
+    return redirect(url_for('home'))
 
 
 if __name__ == '__main__':
