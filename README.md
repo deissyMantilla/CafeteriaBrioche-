@@ -7,6 +7,8 @@ Siga estos pasos para correr el proyecto:
 2. Luego con el entorno virtual activado ejecute los siguientes comandos:
 * pip install flask
 * pip install flask_mail
+* pip install flask_mail
+* pip install Flask-Bcrypt
 * set FLASK_APP=app
 * set FLASK_ENV=development
 * flask run (luego de ejecutar este comando estará corriendo el servidor en http://127.0.0.1:5000/)
