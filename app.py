@@ -320,7 +320,9 @@ def balance(fecha):
         cur = con.cursor()
         cur.execute("select * from ventas where fecha = '" + fecha +"'")
         ventas = cur.fetchall()
-        return render_template('html/balance.html', ventas = ventas)
+        cur.execute("select sum(total) from ventas where fecha = '" + fecha +"'")
+        balance = cur.fetchone()
+        return render_template('html/balance.html', ventas = ventas, balance = balance[0])
     elif 'username' in session:
         return redirect(url_for('ventas'))
     else:
