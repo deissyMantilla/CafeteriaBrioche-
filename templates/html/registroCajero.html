@@ -28,8 +28,13 @@
         } 
     </script>
 </head>
-
+{% if exito == "enviado" %}
+<body onload="alert('Cajero registrado exitosamente!! Se ha enviado un correo con la informacion de registro')">
+{% elif exito == "error" %}
+  <body onload="alert('Error, intente nuevamente')">
+  {% else %}
 <body>
+    {% endif %}
     <nav class="nav">
         <img src="{{url_for('static', filename='img/latte.png')}}" alt="">
         <a href="{{url_for('registroProducto')}}" class="nav-link active">Registrar Producto</a>
@@ -53,23 +58,23 @@
                 <!--apellido-->
                 <div class="col-md-6">
                     <label for="apellido">Apellido:</label><br>
-                    <input type="text" class="form-control" id="apellido" placeholder="Ingrese Apellidos Cajero">
+                    <input name='apellido' type="text" class="form-control" id="apellido" placeholder="Ingrese Apellidos Cajero">
                 </div>
                 <!--edad-->
                 <div class="col-md-6">
                     <label for="edad">Edad:</label><br>
-                    <input type="number" min="18" class="form-control" id="edad" placeholder="Ingrese Edad Cajero">
+                    <input name="edad" type="number" min="18" class="form-control" id="edad" placeholder="Ingrese Edad Cajero">
                 </div>
                 <!--identificacion-->
                 <div class="col-md-6">
                     <label for="identificacion">Identificación:</label><br>
-                    <input type="number" min="1" maxlength="10" class="form-control" id="identificacion"
+                    <input name="identificacion" type="number" min="1" maxlength="10" class="form-control" id="identificacion"
                         placeholder="Ingrese Identificación Cajero">
                 </div>
                 <!--direccion-->
                 <div class="col-md-6">
                     <label for="direccion">Dirección:</label><br>
-                    <input type="text" class="form-control" id="direccion" placeholder="Ingrese Dirección Cajero">
+                    <input name="direccion" type="text" class="form-control" id="direccion" placeholder="Ingrese Dirección Cajero">
                 </div>
                 <!--correo electronico-->
                 <div class="col-md-6">

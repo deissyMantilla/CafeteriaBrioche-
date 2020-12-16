@@ -74,23 +74,46 @@ def recuperarPass(exitoso):
             return redirect(url_for('recuperarPass', exitoso=exitoso))
 
 
-@app.route("/registroCajero", methods=['GET', 'POST'])
-def registroCajero():
+@app.route("/registroCajero", defaults={'exito': None}, methods=['GET', 'POST'])
+@app.route("/registroCajero/<exito>", methods=['GET', 'POST'])
+def registroCajero(exito):
     if request.method == 'GET':
-        return render_template('html/registroCajero.html')
+        return render_template('html/registroCajero.html', exito=exito)
     if request.method == 'POST':
-        # Registro en base de datos
 
-        # Envio correo electronico con informacion de registro
-        nombre = request.form['nombre']
-        email = request.form['email']
-        password = request.form['pass']
-        msg = Message('Registro - Cafeteria Brioche', sender='deissymantilla04@gmail.com',
-                      recipients=[email])
-        msg.body = "Hola " + nombre + ", este es un mensaje enviado por la cafeteria Brioche, has sido registrado con cajero en la cafeteria.  Tu usuario es: " + \
-            email+" y tu contraseña es: "+password
-        mail.send(msg)
-        return render_template('html/registroCajero.html')
+        # Registro en base de datos
+        with sqlite3.connect("brioche.db") as con:
+            try:
+                print('Entró al try')
+                nombre = request.form["nombre"]
+                apellido = request.form["apellido"]
+                correo = request.form["email"]
+                edad = request.form["edad"]
+                identificacion = request.form["identificacion"]
+                direccion = request.form["direccion"]
+                genero = request.form["genero"]
+                contraseña = request.form["pass"]
+                #URLimagen = request.form["URLimagen"]
+                cur = con.cursor()
+                cur.execute("INSERT INTO usuarios (Nombre, Apellido, Correo, Edad, Identificacion, Direccion, Genero,Contraseña) VALUES ('" +
+                            nombre+"','"+apellido+"','"+correo+"','"+edad+"','"+identificacion+"','"+direccion+"','"+genero+"','"+contraseña+"')")
+                con.commit()
+                exito = 'enviado'
+                # Envio correo electronico con informacion de registro
+                nombre = request.form['nombre']
+                email = request.form['email']
+                password = request.form['pass']
+                msg = Message('Registro - Cafeteria Brioche',
+                              sender='deissymantilla04@gmail.com', recipients=[email])
+                msg.body = "Hola " + nombre + ", este es un mensaje enviado por la cafeteria Brioche, has sido registrado como cajero en la cafeteria.  Tu usuario es: " + \
+                    email+" y tu contraseña es: "+password
+                mail.send(msg)
+            except:
+                exito = 'error'
+                print('Error')
+            finally:
+                print('finally print')
+                return redirect(url_for('registroCajero', exito=exito))
 
 
 @app.route("/registroProducto", defaults={'exito': None}, methods=['GET', 'POST'])
