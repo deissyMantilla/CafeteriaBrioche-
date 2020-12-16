@@ -1,6 +1,7 @@
 from flask import Flask, redirect, url_for, render_template, request
 from flask_mail import Mail, Message
 import sqlite3
+import datetime
 
 app = Flask(__name__)
 
@@ -252,10 +253,24 @@ def ventas():
     if request.method == 'POST':
         return render_template('html/administrarVenta.html')
 
+def formatearFecha(date):
+  year = date.strftime("%Y")
+  month = date.strftime("%m")
+  day = date.strftime("%d")
+  return day + "-" + month + "-" + year
 
-@app.route('/balance', methods=['GET'])
-def balance():
-    return render_template('html/balance.html')
+def obtenerFechaActual():
+    x = datetime.datetime.now()    
+    return formatearFecha(x)
+
+@app.route('/balance/<fecha>', defaults={'fecha': obtenerFechaActual()}, methods=['GET'])
+def balance(fecha):
+    con = sqlite3.connect("brioche.db")
+    con.row_factory = sqlite3.Row
+    cur = con.cursor()
+    cur.execute("select * from ventas where fecha = '" + fecha +"'")
+    ventas = cur.fetchall()
+    return render_template('html/balance.html', ventas = ventas)
 
 
 if __name__ == '__main__':

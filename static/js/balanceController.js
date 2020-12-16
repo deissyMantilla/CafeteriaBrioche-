@@ -3,7 +3,7 @@ let inicializarControlador = function() {
 
   window.onload = function() {
     inicializarVariables();
-    llenarItemsVenta();
+    //llenarItemsVenta();
     establecerEventoCambioFecha();
   };
 

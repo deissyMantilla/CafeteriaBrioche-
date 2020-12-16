@@ -38,30 +38,18 @@
             </tr>
           </thead>
           <tbody>
+            {% for venta in ventas %}
             <tr>
-              <td id="ventaID1"></td>
-              <td id="ventaTotal1"></td>     
+              <th scope="row" id="id{{venta.id}}">{{venta.id}}</th>
+              <td id="nombre{{venta.id}}">{{venta.total}}</td>
               <td>                
                   <button class="boton" data-toggle="modal" id="1" data-target="#modal-detalles-venta" onClick="mostrarDetalles(415)">Detalles</button>
               </td>
             </tr>
-            <tr>
-              <td id="ventaID2"></td>
-              <td id="ventaTotal2"></td>   
-              <td>                
-                  <button class="boton" data-toggle="modal" id="2" data-target="#modal-detalles-venta" onClick="mostrarDetalles(416)">Detalles</button>
-              </td>
-            </tr>
-            <tr>
-              <td id="ventaID3"></td>
-              <td id="ventaTotal3"></td>   
-              <td>                
-                  <button class="boton" data-toggle="modal" id="3" data-target="#modal-detalles-venta" onClick="mostrarDetalles(417)">Detalles</button>
-              </td>
-            </tr>
+            {% endfor %}
             <tr>
               <td></td>
-              <td><b>TOTAL: $34.500</b></td>
+              <td><b>TOTAL: $XXXX</b></td>
               <td></td>
             </tr>          
           </tbody>
