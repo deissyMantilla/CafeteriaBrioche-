@@ -55,7 +55,8 @@
               <td id="precio{{producto.id}}">{{producto.precio}}</td>
               <td id="cantidad{{producto.id}}">{{producto.cantidad}}</td>
               <td>
-                  <button class="boton" id="eliminar{{producto.id}}">Eliminar</button>
+                  <!-- <button class="boton" id="eliminar{{producto.id}}">Eliminar</button> -->
+                  <a href="/productos/{{producto.id}}" class="btn btn-danger btn-xs" >Eliminar</a>
                   <button class="boton"  data-toggle="modal" data-target="#exampleModal" onclick="abrirModalProductos(this.id)" id="{{producto.id}}">Actualizar</button>
               </td>
             </tr>

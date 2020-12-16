@@ -93,10 +93,32 @@ def registroCajero():
         return render_template('html/registroCajero.html')
 
 
-@app.route("/registroProducto", methods=['GET', 'POST'])
-def registroProducto():
+@app.route("/registroProducto", defaults={'exito': None}, methods=['GET', 'POST'])
+@app.route("/registroProducto/<exito>", methods=['GET', 'POST'])
+def registroProducto(exito):
     if request.method == 'GET':
-        return render_template('html/registroProducto.html')
+        return render_template('html/registroProducto.html', exito=exito)
+    if request.method == 'POST':
+        with sqlite3.connect("brioche.db") as con:
+            try:
+                nombre = request.form["nombre"]
+                precio = request.form["precio"]
+                cantidad = request.form["cantidad"]
+                cur = con.cursor()
+                cur.execute(
+                    "INSERT INTO productos (nombre, precio,cantidad) VALUES ('"+nombre+"','"+precio+"','"+cantidad+"')")
+                con.commit()
+                exito = 'enviado'
+            except:
+                exito = 'error'
+                print('Error')
+            finally:
+                #alert('Estado: '+msg)
+                # return render_template("productos.html")
+                # return render_template("productos.html",msg = msg)
+                #alert('Estado: ?',msg)
+                print('finally print')
+                return redirect(url_for('registroProducto', exito=exito))
 
 
 @app.route('/cajeros', defaults={'exito': None}, methods=['GET', 'POST'])

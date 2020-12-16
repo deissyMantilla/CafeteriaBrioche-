@@ -13,7 +13,13 @@
       rel="stylesheet"
     />
 </head>
-<body>
+{% if exito == "enviado" %}
+<body onload="alert('Producto registrado exitosamente!!')">
+{% elif exito == "error" %}
+  <body onload="alert('Error, intente nuevamente')">
+  {% else %}
+  <body>
+{% endif %}
     <nav class="nav">
         <img src="{{url_for('static', filename='img/latte.png')}}" alt="">
         <a href="{{url_for('registroProducto')}}" class="nav-link active">Registrar Producto</a>
@@ -28,10 +34,10 @@
         <div class="cuadroRegistroProducto">
     
             <div class="titulo">Registrar un producto</div>
-            <form action="" class="formularioProducto">
-                <input type="text" placeholder="Nombre*" class="inputRegistroProducto">
-                <input type="number" placeholder="Precio*" class="inputRegistroProducto">
-                <input type="number" placeholder="Cantidad*" class="inputRegistroProducto">
+            <form action="" class="formularioProducto" method="POST">
+                <input name='nombre' type="text" placeholder="Nombre*" class="inputRegistroProducto">
+                <input name="precio" type="number" placeholder="Precio*" class="inputRegistroProducto">
+                <input name="cantidad" type="number" placeholder="Cantidad*" class="inputRegistroProducto">
                 <label for="" class="labelFormularioProfucto">Imagen producto</label>
                 <input type="file" class="fileProducto">
                 <input type="submit" value="Registar producto" class="botonRegistrar">
