@@ -170,7 +170,7 @@ def productos(exito):
         cur = con.cursor()
         cur.execute("select * from productos")
         productos = cur.fetchall()
-        return render_template('html/productos.html', productos=productos)
+        return render_template('html/productos.html', productos=productos, exito=exito)
     if request.method == 'POST':
         # se toman los los datos del formulario para enviarlos a la base de datos
         idProducto = request.form['id']
