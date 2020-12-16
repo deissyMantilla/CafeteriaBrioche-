@@ -183,17 +183,29 @@ def cajeros(exito):
     # variable exitoso para activar alerta de confirmacion
 
 
-@app.route('/productos', defaults={'exito': None}, methods=['GET', 'POST'])
-@app.route('/productos/<exito>',  methods=['GET', 'POST'])
-def productos(exito):
+@app.route('/productos', defaults={'exito': None, 'idP': None}, methods=['GET', 'POST'])
+@app.route('/productos/<exito>', defaults={'idP': None},  methods=['GET', 'POST'])
+@app.route('/productos/<idP>', defaults={'exito': None}, methods=['GET', 'POST'])
+def productos(exito, idP):
     # Se piden los datos de productos a la base de datos
     if request.method == 'GET':
-        con = sqlite3.connect("brioche.db")
-        con.row_factory = sqlite3.Row
-        cur = con.cursor()
-        cur.execute("select * from productos")
-        productos = cur.fetchall()
-        return render_template('html/productos.html', productos=productos, exito=exito)
+        if idP:
+            with sqlite3.connect("brioche.db") as con:
+                try:
+                    cur = con.cursor()
+                    cur.execute("delete from productos where id = ?", idP)
+                    print("record successfully deleted")
+                except:
+                    print("can't be deleted")
+                finally:
+                    return redirect(url_for('productos'))
+        else:
+            con = sqlite3.connect("brioche.db")
+            con.row_factory = sqlite3.Row
+            cur = con.cursor()
+            cur.execute("select * from productos")
+            productos = cur.fetchall()
+            return render_template('html/productos.html', productos=productos, exito=exito)
     if request.method == 'POST':
         # se toman los los datos del formulario para enviarlos a la base de datos
         idProducto = request.form['id']
