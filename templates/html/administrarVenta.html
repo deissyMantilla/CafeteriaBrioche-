@@ -348,7 +348,18 @@
             <div class="col-md-9">
                 <div class="row g-2">
                     <!-- Elementos generados a partir del JSON -->
-                    <main id="items" class="col-sm-8 row"></main>                    
+                    <main id="items" class="col-sm-8 row">
+                        {% for producto in productos %}
+                        <div class="card col-sm-3">
+                            <div class="card-body">
+                                <h5 class="card-title">{{producto.nombre}}</h5>
+                                <img src="{{url_for('static', filename='img/hot-tea.png')}}" alt="" class="img-fluid">
+                                <p class="card-text"> ${{producto.precio}} </p>
+                                <button class="btn, btn-primary" onclick="anyadirCarrito()" marcador="{{producto.id}}">+</button>
+                            </div>
+                        </div>
+                        {% endfor%}
+                    </main>                    
                 </div>
             </div>
         </div>

@@ -197,7 +197,12 @@ def productos(exito):
 @app.route('/ventas', methods=['GET', 'POST'])
 def ventas():
     if request.method == 'GET':
-        return render_template('html/administrarVenta.html')
+        con = sqlite3.connect("brioche.db")
+        con.row_factory = sqlite3.Row
+        cur = con.cursor()
+        cur.execute("select * from productos")
+        productos = cur.fetchall()
+        return render_template('html/administrarVenta.html', productos=productos)
     if request.method == 'POST':
         return render_template('html/administrarVenta.html')
 
