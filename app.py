@@ -1,8 +1,10 @@
 from flask import Flask, redirect, url_for, render_template, request, session
 from flask_mail import Mail, Message
+from flask_bcrypt import Bcrypt
 import sqlite3
 
 app = Flask(__name__)
+bcrypt = Bcrypt(app)
 app.secret_key = 'brioche123'
 
 # Se configura las propiedades de envio de correos
@@ -103,10 +105,12 @@ def registroCajero(exito):
                     direccion = request.form["direccion"]
                     genero = request.form["genero"]
                     contraseña = request.form["pass"]
+                    pw_hash = bcrypt.generate_password_hash(contraseña)
                     # URLimagen = request.form["URLimagen"]
                     cur = con.cursor()
-                    cur.execute("INSERT INTO usuarios (Nombre, Apellido, Correo, Edad, Identificacion, Direccion, Genero,Contraseña) VALUES ('" +
-                                nombre+"','"+apellido+"','"+correo+"','"+edad+"','"+identificacion+"','"+direccion+"','"+genero+"','"+contraseña+"')")
+
+                    cur.execute("INSERT INTO usuarios (Nombre, Apellido, Correo, Edad, Identificacion, Direccion, Genero,Contraseña) VALUES (?,?,?,?,?,?,?,?)",
+                                (nombre, apellido, correo, edad, identificacion, direccion, genero, pw_hash))
                     con.commit()
                     exito = 'enviado'
                     # Envio correo electronico con informacion de registro
