@@ -15,6 +15,8 @@
     
   {% if exitoso == "enviado" %}
   <body onload="alert('Se ha enviado un correo con la información de su contraseña')">
+  {% elif exitoso== "noRegistrado"%}
+  <body onload="alert('Credenciales incorrectas, intenta nuevamente')">
    {% else %}
     <body>
   {% endif %}

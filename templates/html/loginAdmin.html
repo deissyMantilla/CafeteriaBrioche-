@@ -12,7 +12,11 @@
     <link href="{{url_for('static', filename='css/stylesLogin.css')}}" rel="stylesheet">
 
   </head>
-  <body>
+  {% if exitoso== "noRegistrado"%}
+  <body onload="alert('Credenciales incorrectas, intenta nuevamente')">
+   {% else %}
+    <body>
+  {% endif %}
     <div class="cuadroLogin">
       <h3 class="ingresaLabel">Ingresa a la plataforma</h3>
       <form action="" class="formularioLogin" method="POST">

@@ -25,17 +25,24 @@ def home():
         return render_template('html/index.html')
 
 
-@app.route("/loginAdmin", methods=['GET', 'POST'])
-def login():
+@app.route("/loginAdmin", defaults={'exitoso': None}, methods=['GET', 'POST'])
+@app.route("/loginAdmin/<exitoso>", methods=['GET', 'POST'])
+def login(exitoso):
     if request.method == 'GET':
-        return render_template('html/loginAdmin.html')
+        return render_template('html/loginAdmin.html', exitoso=exitoso)
     if request.method == 'POST':
         username = request.form['username']
         password = request.form['password']
+        correoAdmin = 'admin@gmail.com'
+        passAdmin = 'Brioche_admin'
+        if username == correoAdmin and password == passAdmin:
+            session['username'] = username
+            session['rol'] = 'admin'
+            return redirect(url_for('productos'))
+        else:
+            exitoso = 'noRegistrado'
+            return render_template('html/loginAdmin.html', exitoso=exitoso)
         # Falta validar la contraseña
-        session['username'] = username
-        session['rol'] = 'admin'
-        return redirect(url_for('productos'))
 
 
 @app.route("/loginCajero", defaults={'exitoso': None}, methods=['GET', 'POST'])
@@ -47,10 +54,24 @@ def loginCajero(exitoso):
     if request.method == 'POST':
         username = request.form['username']
         password = request.form['password']
+        con = sqlite3.connect("brioche.db")
+        con.row_factory = sqlite3.Row
+        cur = con.cursor()
+        cur.execute(
+            "select Correo, Contraseña from usuarios where Correo = '"+username+"'")
+        respuesta = cur.fetchmany()
+        if respuesta:
+            contrase = respuesta[0][1]
+            if bcrypt.check_password_hash(contrase, password):
+                session['username'] = username
+                session['rol'] = 'cajero'
+                return redirect(url_for('ventas'))
+            else:
+                exitoso = 'noRegistrado'
+                return render_template('html/loginCajero.html', exitoso=exitoso)
+        else:
+            print('error')
         # Falta validar la contraseña
-        session['username'] = username
-        session['rol'] = 'cajero'
-        return redirect(url_for('ventas'))
 
 
 @app.route("/recuperarPass", defaults={'exitoso': None}, methods=['GET', 'POST'])
