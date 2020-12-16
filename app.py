@@ -43,6 +43,11 @@ def loginCajero(exitoso):
         print(exitoso)
         return render_template('html/loginCajero.html', exitoso=exitoso)
     if request.method == 'POST':
+        username = request.form['username']
+        password = request.form['password']
+        # Falta validar la contraseña
+        session['username'] = username
+        session['rol'] = 'cajero'
         return redirect(url_for('ventas'))
 
 
@@ -250,15 +255,18 @@ def productos(exito, idP):
 
 @app.route('/ventas', methods=['GET', 'POST'])
 def ventas():
-    if request.method == 'GET':
-        con = sqlite3.connect("brioche.db")
-        con.row_factory = sqlite3.Row
-        cur = con.cursor()
-        cur.execute("select * from productos")
-        productos = cur.fetchall()
-        return render_template('html/administrarVenta.html', productos=productos)
-    if request.method == 'POST':
-        return render_template('html/administrarVenta.html')
+    if 'username' in session:
+        if request.method == 'GET':
+            con = sqlite3.connect("brioche.db")
+            con.row_factory = sqlite3.Row
+            cur = con.cursor()
+            cur.execute("select * from productos")
+            productos = cur.fetchall()
+            return render_template('html/administrarVenta.html', productos=productos)
+        if request.method == 'POST':
+            return render_template('html/administrarVenta.html')
+    else:
+        return redirect(url_for('home'))
 
 
 @app.route('/balance', methods=['GET'])
