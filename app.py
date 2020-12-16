@@ -122,6 +122,8 @@ def registroCajero(exito):
                     exito = 'error'
                 finally:
                     return redirect(url_for('registroCajero', exito=exito))
+    elif 'username' in session:
+        return redirect(url_for('ventas'))
     else:
         return redirect(url_for('home'))
 
@@ -147,6 +149,8 @@ def registroProducto(exito):
                     exito = 'error'
                 finally:
                     return redirect(url_for('registroProducto', exito=exito))
+    elif 'username' in session:
+        return redirect(url_for('ventas'))
     else:
         return redirect(url_for('home'))
 
@@ -199,6 +203,8 @@ def cajeros(exito, idP):
                     exito = "error"
                 finally:
                     return redirect(url_for('cajeros', exito=exito))
+    elif 'username' in session:
+        return redirect(url_for('ventas'))
     else:
         return redirect(url_for('home'))
     # variable exitoso para activar alerta de confirmacion
@@ -248,6 +254,8 @@ def productos(exito, idP):
                     exito = "error"
                 finally:
                     return redirect(url_for('productos', exito=exito))
+    elif 'username' in session:
+        return redirect(url_for('ventas'))
     else:
         return redirect(url_for('home'))
     # variable exito para activar alerta de confirmacion
@@ -272,7 +280,10 @@ def ventas():
 @app.route('/balance', methods=['GET'])
 def balance():
     if 'username' in session and session['rol'] == 'admin':
+        # aqui va la conexion con la base de datos
         return render_template('html/balance.html')
+    elif 'username' in session:
+        return redirect(url_for('ventas'))
     else:
         return redirect(url_for('home'))
 
