@@ -15,14 +15,16 @@
     
   {% if exitoso == "enviado" %}
   <body onload="alert('Se ha enviado un correo con la información de su contraseña')">
+  {% elif exitoso== "noRegistrado"%}
+  <body onload="alert('Credenciales incorrectas, intenta nuevamente')">
    {% else %}
     <body>
   {% endif %}
     <div class="cuadroLogin" >
       <h3 class="ingresaLabel">Ingresa a la plataforma</h3>
       <form action="" class="formularioLogin" method="POST">
-        <input type="email" placeholder="Correo electronico" class="inputFormulario" required/>
-        <input type="password" placeholder="Contraseña" class="inputFormulario" required/>
+        <input name="username" type="email" placeholder="Correo electronico" class="inputFormulario" required/>
+        <input name="password" type="password" placeholder="Contraseña" class="inputFormulario" required/>
         <div class="cajaBotones">
           <input type="submit" value="Ingresar" class="botonIngresar" />
           <a href="/" class="botonIngresar"> Regresar</a>
