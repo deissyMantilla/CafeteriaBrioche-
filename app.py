@@ -306,14 +306,19 @@ def formatearFecha(date):
   year = date.strftime("%Y")
   month = date.strftime("%m")
   day = date.strftime("%d")
-  return day + "-" + month + "-" + year
+  return year + "-" + month + "-" + day
 
 def obtenerFechaActual():
     x = datetime.datetime.now()    
     return formatearFecha(x)
 
-@app.route('/balance/<fecha>', defaults={'fecha': obtenerFechaActual()}, methods=['GET'])
-def balance(fecha):
+@app.route("/balance", methods=['GET', 'POST'])
+def balance():
+    if request.method == 'GET':
+        fecha = obtenerFechaActual()        
+    elif request.method == 'POST':
+        fecha = request.form['fechaBalance']
+        
     if 'username' in session and session['rol'] == 'admin':
         con = sqlite3.connect("brioche.db")
         con.row_factory = sqlite3.Row
@@ -321,13 +326,15 @@ def balance(fecha):
         cur.execute("select * from ventas where fecha = '" + fecha +"'")
         ventas = cur.fetchall()
         cur.execute("select sum(total) from ventas where fecha = '" + fecha +"'")
-        balance = cur.fetchone()
-        return render_template('html/balance.html', ventas = ventas, balance = balance[0])
+        cursor_balance = cur.fetchone()
+        balance = 0
+        if cursor_balance[0] != None:
+            balance = cursor_balance[0]
+        return render_template('html/balance.html', ventas = ventas, balance = balance, fecha = fecha)
     elif 'username' in session:
         return redirect(url_for('ventas'))
     else:
-        return redirect(url_for('home'))
-
+        return redirect(url_for('home'))#
 
 @app.route("/cerrarSesion", methods=['GET'])
 def cerrarSesion():
