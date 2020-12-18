@@ -1,0 +1,73 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+.contenido {
+  background-image: url(../img/background.jpg);
+  background-size: cover;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 88vh;
+  min-width: 100vw;
+  max-width: auto;
+}
+.ventas {
+  width: 90vw;
+  height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.carrito {
+  background-color: rgb(236, 234, 234);
+  height: 70vh;
+  width: 20vw;
+}
+.productos {
+  background-color: white;
+  height: 70vh;
+  width: 70vw;
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  grid-template-rows: auto;
+  gap: 2%;
+  padding: 5px;
+  overflow: scroll;
+}
+.cuadroProducto {
+  background-color: rgb(237, 240, 250);
+  height: 200px;
+  width: 200px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  border-radius: 10px;
+}
+.imagenProducto {
+  height: 80px;
+  width: 80px;
+}
+.tituloCarrito {
+  padding-top: 5px;
+  text-align: center;
+  background-color: rgb(55, 0, 128);
+  color: white;
+  height: 30px;
+}
+.listaCompra {
+  overflow: scroll;
+  height: 55vh;
+  background-color: white;
+}
+.botonesVentas {
+  padding-top: 10px;
+  display: flex;
+  align-items: center;
+  justify-content: space-evenly;
+}
+.btn {
+  margin: 2px;
+}

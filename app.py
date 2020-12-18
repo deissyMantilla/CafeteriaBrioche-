@@ -1,4 +1,4 @@
-from flask import Flask, redirect, url_for, render_template, request, session
+from flask import Flask, redirect, url_for, render_template, request, session, jsonify, json
 from flask_mail import Mail, Message
 from flask_bcrypt import Bcrypt
 import sqlite3
@@ -302,39 +302,81 @@ def ventas():
     else:
         return redirect(url_for('home'))
 
+
+@app.route('/ven', methods=['GET', 'POST'])
+def ven():
+    if 'username' in session:
+        if request.method == 'GET':
+            con = sqlite3.connect("brioche.db")
+            con.row_factory = sqlite3.Row
+            cur = con.cursor()
+            cur.execute("select * from productos")
+            productos = cur.fetchall()
+            return render_template('html/ventas.html', productos=productos)
+        if request.method == 'POST':
+            datos = json.dumps(request.get_json())
+            sdatos = json.loads(datos)
+            with sqlite3.connect("brioche.db") as con:
+                try:
+                    total = sdatos['totalVenta']
+                    productos = sdatos["procutos"]
+                    fecha = obtenerFechaActual()
+                    cur = con.cursor()
+                    cur.execute(
+                        "INSERT INTO ventas (fecha, total) VALUES (?,?)", (fecha, total))
+                    con.commit()
+                    exito = 'Factura generada exitosamente!'
+                    idFactura = cur.lastrowid
+                    for producto in productos:
+                        cur.execute(
+                            "INSERT INTO productos_venta (id_venta, id_producto,cantidad,subtotal) VALUES (?,?,?,?)", (idFactura, producto[0], producto[3], producto[2]))
+
+                except:
+                    exito = 'error'
+                finally:
+                    return exito
+
+    else:
+        return redirect(url_for('home'))
+
+
 def formatearFecha(date):
-  year = date.strftime("%Y")
-  month = date.strftime("%m")
-  day = date.strftime("%d")
-  return year + "-" + month + "-" + day
+    year = date.strftime("%Y")
+    month = date.strftime("%m")
+    day = date.strftime("%d")
+    return year + "-" + month + "-" + day
+
 
 def obtenerFechaActual():
-    x = datetime.datetime.now()    
+    x = datetime.datetime.now()
     return formatearFecha(x)
+
 
 @app.route("/balance", methods=['GET', 'POST'])
 def balance():
     if request.method == 'GET':
-        fecha = obtenerFechaActual()        
+        fecha = obtenerFechaActual()
     elif request.method == 'POST':
         fecha = request.form['fechaBalance']
-        
+
     if 'username' in session and session['rol'] == 'admin':
         con = sqlite3.connect("brioche.db")
         con.row_factory = sqlite3.Row
         cur = con.cursor()
-        cur.execute("select * from ventas where fecha = '" + fecha +"'")
+        cur.execute("select * from ventas where fecha = '" + fecha + "'")
         ventas = cur.fetchall()
-        cur.execute("select sum(total) from ventas where fecha = '" + fecha +"'")
+        cur.execute(
+            "select sum(total) from ventas where fecha = '" + fecha + "'")
         cursor_balance = cur.fetchone()
         balance = 0
         if cursor_balance[0] != None:
             balance = cursor_balance[0]
-        return render_template('html/balance.html', ventas = ventas, balance = balance, fecha = fecha)
+        return render_template('html/balance.html', ventas=ventas, balance=balance, fecha=fecha)
     elif 'username' in session:
         return redirect(url_for('ventas'))
     else:
-        return redirect(url_for('home'))#
+        return redirect(url_for('home'))
+
 
 @app.route("/cerrarSesion", methods=['GET'])
 def cerrarSesion():
