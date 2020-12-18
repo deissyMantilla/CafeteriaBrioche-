@@ -288,22 +288,6 @@ def productos(exito, idP):
 
 
 @app.route('/ventas', methods=['GET', 'POST'])
-def ventas():
-    if 'username' in session:
-        if request.method == 'GET':
-            con = sqlite3.connect("brioche.db")
-            con.row_factory = sqlite3.Row
-            cur = con.cursor()
-            cur.execute("select * from productos")
-            productos = cur.fetchall()
-            return render_template('html/administrarVenta.html', productos=productos)
-        if request.method == 'POST':
-            return render_template('html/administrarVenta.html')
-    else:
-        return redirect(url_for('home'))
-
-
-@app.route('/ven', methods=['GET', 'POST'])
 def ven():
     if 'username' in session:
         if request.method == 'GET':

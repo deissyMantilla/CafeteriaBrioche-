@@ -80,7 +80,7 @@
             for (let i in carrito){
                 totalPagar += carrito[i][2];
             }
-            console.log(totalPagar)
+            
         }
         function masCarrito() {
             let stringid = this.getAttribute('id')
@@ -98,7 +98,7 @@
         }
         function enviarFactura() {
 
-            fetch('/ven', {
+            fetch('/ventas', {
 
 // Declare what type of data we're sending
 headers: {
