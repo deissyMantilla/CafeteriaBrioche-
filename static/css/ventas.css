@@ -22,12 +22,12 @@
 }
 .carrito {
   background-color: rgb(236, 234, 234);
-  height: 70vh;
+  height: 80vh;
   width: 20vw;
 }
 .productos {
   background-color: white;
-  height: 70vh;
+  height: 80vh;
   width: 70vw;
   display: grid;
   grid-template-columns: repeat(4, 1fr);
@@ -59,7 +59,7 @@
 }
 .listaCompra {
   overflow: scroll;
-  height: 55vh;
+  height: 58vh;
   background-color: white;
 }
 .botonesVentas {
