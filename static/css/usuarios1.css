@@ -24,7 +24,8 @@ body {
 .table {
   background-color: white;
   width: 80vw;
-  height: 90%;
+  max-height: 80vh;
+  overflow: scroll;
 }
 .table tr:hover {
   background-color: #ebe9e9;
