@@ -4,6 +4,7 @@ from flask_bcrypt import Bcrypt
 import sqlite3
 import datetime
 
+
 app = Flask(__name__)
 bcrypt = Bcrypt(app)
 app.secret_key = 'brioche123'
@@ -260,7 +261,7 @@ def productos(exito, idP):
                 cur = con.cursor()
                 cur.execute("select * from productos")
                 productos = cur.fetchall()
-                return render_template('html/productos.html', productos=productos, exito=exito)
+                return render_template('html/productos1.html', productos=productos, exito=exito)
         if request.method == 'POST':
             # se toman los los datos del formulario para enviarlos a la base de datos
             idProducto = request.form['id']
